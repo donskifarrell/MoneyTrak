@@ -1,1 +1,32 @@
 /* CSS declarations go here */
+
+/* Setting UI sections to take up fullscreen */
+html, body {
+    height: 100%;
+
+}
+
+.fill {
+    min-height: 100%;
+    position: relative;    
+}
+
+.rfill {
+    right: 0;
+    .filler;
+}
+
+.lfill {
+    left: 0;
+    .filler;
+}
+
+.filler {
+    background-color: inherit;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    top: 0;
+    width: inherit;
+    z-index: -1;  
+}
