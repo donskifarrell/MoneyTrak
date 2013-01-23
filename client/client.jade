@@ -4,16 +4,16 @@ body
 	.container-fluid.fill
 		.row-fluid
 			.span3.lfill.sidebar
-				.header
-					h1
-						a(href='#') LifeChart.Me
-					h4.subheader View and graph your money
-				hr
+				.wrap
+					header.side-header
+						h1
+							a(href='#') LifeChart.Me
+						h4.subheader View and graph your money
+					hr		
+				footer.side-footer
+					hr
+					p test
 			.span9.rfill.main
 				p Somethingelsesss
 				{{> hello}}
-	.push
-	.footer
-		.container
-			.muted.credit
-				p test
+

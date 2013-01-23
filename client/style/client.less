@@ -1,6 +1,6 @@
 /* CSS declarations go here */
 
-/* Setting UI sections to take up fullscreen */
+/* Styling UI sections to take up fullscreen */
 html, body {
     height: 100%;
 
@@ -41,24 +41,26 @@ html, body {
     -mox-box-shadow: 0px 4px 20px #231F20;
 }
 
+.wrap {
+	min-height: 99%;
+}
+
 /* Styling Header */
 
-.header {
+.side-header {
 	padding-left: 20px;
 }
 
 /* Styling Footer */
-.push, .footer {
-	height: 60px;
-}
-.footer {
-	background-color: #f5f5f5;
+
+.side-footer {
+	background-color: #fff;
+	margin-top: -180px; /* negative value of footer height */
+	height: 140px;
 }
 
-/* Styling Footer */
-.push, .footer {
-	height: 60px;
-}
-.footer {
-	background-color: #f5f5f5;
+/* Styling General Elements */
+
+hr {
+	height: 1px;
 }
