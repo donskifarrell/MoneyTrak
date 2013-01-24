@@ -1,9 +1,9 @@
 template(name='loginButtons')
-  ul
+  .side-auth
     {{#if currentUser}}
       {{> loggedin}}
     {{else}}
-      legend Welcome! 
+      legend Welcome!
       {{> loggedout}}
     {{/if}}
 
