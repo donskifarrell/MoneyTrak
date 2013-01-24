@@ -3,7 +3,7 @@ template(name='loginButtons')
     {{#if currentUser}}
       {{> loggedin}}
     {{else}}
-      p Hi, log in!
+      legend Welcome! 
       {{> loggedout}}
     {{/if}}
 
@@ -27,5 +27,24 @@ template(name='loggedin')
   {{/if}}
 
 template(name='loggedout')
-  li
-  a#login Log in with Github
+  form.login-form
+      fieldset
+          .control-group.input-prepend
+            .controls
+              span.add-on
+                i.icon-user
+              input#emailAddr(type='text', placeholder='Username')
+          .control-group.input-prepend
+            .controls
+              span.add-on
+                i.icon-lock
+              input#pass(type='password', placeholder='Password')          
+          .control-group.input-prepend
+            .controls
+              span.add-on
+                i.icon-exclamation-sign
+              input#confpass(type='password', placeholder='Confirm Password')
+          .form-actions
+            button.btn.btn-primary(type='submit') Create Account
+            button.btn Cancel
+
