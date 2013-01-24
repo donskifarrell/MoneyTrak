@@ -1,4 +1,31 @@
-template(name='login')
-	h1 Hi there, log in
-	{{greeting}}
-	input(type='button', value='Click').btn-primary
+template(name='loginButtons')
+  ul
+    {{#if currentUser}}
+      {{> loggedin}}
+    {{else}}
+      p Hi, log in!
+      {{> loggedout}}
+    {{/if}}
+
+template(name='loggedin')
+  {{#if loggingIn}}
+    li
+      a Logging in...
+  {{else}}
+    li
+      img.img-rounded(style='height: 32px; margin-top: 4px;', src='{{currentUser.profile.avatar_url}}')
+    li.dropdown
+      a.dropdown-toggle(href='#', data-toggle='dropdown')
+        {{currentUser.profile.login}}
+        b.caret
+      ul.dropdown-menu
+        li
+          a Account Settings
+        li.divider
+        li
+          a#logout Logout
+  {{/if}}
+
+template(name='loggedout')
+  li
+  a#login Log in with Github
