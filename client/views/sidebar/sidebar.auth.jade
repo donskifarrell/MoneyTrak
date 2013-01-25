@@ -1,13 +1,13 @@
 template(name='loginButtons')
   .side-auth
     {{#if currentUser}}
-      {{> loggedin}}
+      {{> loggedIn}}
     {{else}}
       legend Welcome!
-      {{> loggedout}}
+      {{> loggedOut}}
     {{/if}}
 
-template(name='loggedin')
+template(name='loggedIn')
   {{#if loggingIn}}
     li
       a Logging in...
@@ -26,7 +26,16 @@ template(name='loggedin')
           a#logout Logout
   {{/if}}
 
-template(name='loggedout')
+template(name='loggedOut')
+  {{> newAccount}}
+  p -- Or --
+  button.btn.google Login with Google | 
+    i.icon-user
+  p -- Or --
+  button.btn.twitter Login with Twitter | 
+    i.icon-user
+
+template(name='newAccount')
   form.login-form
       fieldset
           .control-group.input-prepend
