@@ -1,0 +1,75 @@
+/* 
+    WARP SHADOW
+
+    http://bigpapi.shompton.net/~covidien/BioMed/css3-shadow-pack/Source/ 
+*/
+
+/**  'smallBox' class for boxes with width between 150px - 350px  **/
+.smallBox.WarpShadow:before {
+    -moz-transform: rotate(8deg) skew(4deg);
+    -webkit-transform: rotate(8deg) skew(4deg);
+    -o-transform: rotate(8deg) skew(4deg);
+    transform: rotate(8deg) skew(4deg);
+}
+.WarpShadow:before, .WarpShadow:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 15px;
+    -moz-box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.7);
+    -webkit-box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.7);
+}
+.WarpShadow {
+    position: relative;
+    -moz-box-shadow: 0 14px 10px -12px rgba(0,0,0,0.7);
+    -webkit-box-shadow: 0 14px 10px -12px rgba(0,0,0,0.7);
+    box-shadow: 0 14px 10px -12px rgba(0,0,0,0.7);
+}
+.WDark:before, .WDark:after {
+    height: 15px;
+}
+.smallBox.WLarge:before, .smallBox.WLarge:after {
+    width: 130px;
+}
+.smallBox.WSmall:before, .smallBox.WSmall:after {
+    width: 30px;
+}
+.WLarge:before, .WLarge:after {
+    width: 350px;
+}
+.WarpShadow:before {
+    right: 10px;
+    -moz-transform: rotate(4deg) skew(4deg);
+    -webkit-transform: rotate(4deg) skew(4deg);
+    -o-transform: rotate(4deg) skew(4deg);
+    transform: rotate(4deg) skew(4deg);
+}
+.WLight:before, .WLight:after {
+    height: 5px;
+}
+.WMedium:before, .WMedium:after {
+    width: 250px;
+}
+.WarpShadow:after {
+    left: 10px;
+    -moz-transform: rotate(-4deg) skew(-4deg);
+    -webkit-transform: rotate(-4deg) skew(-4deg);
+    -o-transform: rotate(-4deg) skew(-4deg);
+    transform: rotate(-4deg) skew(-4deg);
+}
+.WNormal:before, .WNormal:after {
+    height: 10px;
+}
+.WSmall:before, .WSmall:after {
+    width: 150px;
+}
+.smallBox.WarpShadow:after {
+    -moz-transform: rotate(-8deg) skew(-4deg);
+    -webkit-transform: rotate(-8deg) skew(-4deg);
+    -o-transform: rotate(-8deg) skew(-4deg);
+    transform: rotate(-8deg) skew(-4deg);
+}
+.smallBox.WMedium:before, .smallBox.WMedium:after {
+    width: 80px;
+}
