@@ -28,10 +28,12 @@ template(name='loggedIn')
 
 template(name='loggedOut')
   {{> newAccount}}
-  p -- Or --
+  p.or 
+    span Or
   button.btn.google Login with Google | 
     i.icon-user
-  p -- Or --
+  p.or
+    span Or
   button.btn.twitter Login with Twitter | 
     i.icon-user
 
