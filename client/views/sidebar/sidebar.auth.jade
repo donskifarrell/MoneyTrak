@@ -27,7 +27,11 @@ template(name='loggedIn')
   {{/if}}
 
 template(name='loggedOut')
-  {{> login}}
+  {{#if has_account}}
+    {{> login}}
+  {{else}}
+    {{> enroll}}
+  {{/if}}
   p.or 
     span Or
   button.btn.google Login with Google | 

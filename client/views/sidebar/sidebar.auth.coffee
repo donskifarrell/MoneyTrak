@@ -24,7 +24,17 @@ Meteor.startup ->
         else
           # show an alert
 
-  Template.login.events "click .enrollBtn": (e, tmpl) ->
+  Template.login.events "click .toEnrollBtn": (e, tmpl) ->
     e.preventDefault()
     e.stopPropagation()
-    alert('Clickiasd')
+    Session.set("has_account", false)
+
+  Template.enroll.events "click .toLoginBtn": (e, tmpl) ->
+    e.preventDefault()
+    e.stopPropagation()
+    Session.set("has_account", true)
+
+  Template.loggedOut.has_account = ->
+    Session.equals("has_account", true)
+
+
