@@ -57,7 +57,7 @@ template(name='login')
             .span3
               button.btn.btn-primary(type='submit').loginBtn Login
 
-template(name='newAccount')
+template(name='enroll')
   form.login-form
       fieldset
           .control-group.input-prepend
@@ -76,9 +76,9 @@ template(name='newAccount')
                 i.icon-exclamation-sign
               input#confpass(type='password', placeholder='Confirm Password')
           .form-actions
-            .span9.left-pull
+            .span9.left-pull.enroll
               p Already registered?
                 button.btn.btn-link.toLoginBtn Login here!
             .span3
-              button.btn.btn-primary(type='submit').enrollBtn Create Account
+              button.btn.btn-primary(type='submit').enrollBtn Register
 
