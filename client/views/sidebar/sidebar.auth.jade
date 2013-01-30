@@ -27,7 +27,7 @@ template(name='loggedIn')
   {{/if}}
 
 template(name='loggedOut')
-  {{> newAccount}}
+  {{> login}}
   p.or 
     span Or
   button.btn.google Login with Google | 
@@ -36,6 +36,26 @@ template(name='loggedOut')
     span Or
   button.btn.twitter Login with Twitter | 
     i.icon-user
+
+template(name='login')
+  form.login-form
+      fieldset
+          .control-group.input-prepend
+            .controls
+              span.add-on
+                i.icon-user
+              input#emailAddr(type='text', placeholder='Username')
+          .control-group.input-prepend
+            .controls
+              span.add-on
+                i.icon-lock
+              input#pass(type='password', placeholder='Password')
+          .form-actions
+            .span9.left-pull
+              p Haven't got an account?
+                button.btn.btn-link.enrollBtn Create one here!
+            .span3
+              button.btn.btn-primary(type='submit').loginBtn Login
 
 template(name='newAccount')
   form.login-form
