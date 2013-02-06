@@ -1,7 +1,7 @@
 head
 	title LifeChart
 body
-	.container-fluid.fill
+	.container-fluid
 		.row-fluid
 			.span3.lfill.sidebar
 				.wrap
@@ -11,11 +11,10 @@ body
 						h4.subheader View and graph your money
 					hr
 					.side-content
-						{{> login}}
+						{{> loginButtons}}
 				footer.side-footer
 					hr
-					p test
+					p Footer Content Here
 			.span9.rfill.main
-				p Somethingelsesss
-				{{> hello}}
+				{{> landingPage}}
 

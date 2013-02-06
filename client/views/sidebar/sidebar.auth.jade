@@ -1,4 +1,75 @@
-template(name='login')
-	h1 Hi there, log in
-	{{greeting}}
-	input(type='button', value='Click').btn-primary
+template(name='loginButtons')
+  .side-auth
+    {{#if currentUser}}
+      {{> loggedIn}}
+    {{else}}
+      legend Welcome!
+      {{> loggedOut}}
+    {{/if}}
+
+template(name='loggedIn')
+  {{#if loggingIn}}
+    li
+      a Logging in...
+  {{else}}
+    li
+      img.img-rounded(style='height: 32px; margin-top: 4px;', src='{{currentUser.profile.avatar_url}}')
+    li.dropdown
+      a.dropdown-toggle(href='#', data-toggle='dropdown')
+        {{currentUser.profile.login}}
+        b.caret
+      ul.dropdown-menu
+        li
+          a Account Settings
+        li.divider
+        li
+          a#logout Logout
+  {{/if}}
+
+template(name='loggedOut')
+  {{> user_account_form}}
+  p.or 
+    span Or
+  button.btn.google Login with Google | 
+    i.icon-user
+  p.or
+    span Or
+  button.btn.twitter Login with Twitter | 
+    i.icon-user
+
+template(name='user_account_form')
+  form.login-form
+      fieldset
+          .control-group.input-prepend
+            .controls
+              span.add-on
+                i.icon-user
+              input#login-email(type='text', placeholder='Username')
+          .control-group.input-prepend
+            .controls
+              span.add-on
+                i.icon-lock
+              input#login-password(type='password', placeholder='Password')
+          {{> _loginButtonsMessages}}
+        {{#if has_account}}
+          .form-actions
+            .span9.left-pull
+              p Haven't got an account?
+                button.btn.btn-link.toEnrollBtn Create one here!
+            .span3
+              #login-buttons-password.btn.btn-primary.login-button-form-submit.login-button Login
+        {{else}}
+          .control-group.input-prepend
+            .controls
+              span.add-on
+                i.icon-exclamation-sign
+              input#confpass(type='password', placeholder='Confirm Password')
+          .form-actions
+            .span9.left-pull.enroll
+              p Already registered?
+                button.btn.btn-link.toLoginBtn Login here!
+            .span3
+              #login-buttons-password.btn.btn-primary(type='submit').enrollBtn Register
+        {{/if}}
+
+

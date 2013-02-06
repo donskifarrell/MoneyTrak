@@ -1,4 +1,21 @@
-template(name='hello')
-	h1 Hello Worlfgdfd!
-	{{greeting}}
-	input(type='button', value='Click').btn-primary
+template(name='landingPage')
+  .box.WarpShadow.WLarge.WNormal
+    #myCarousel.carousel.slide
+      .carousel-inner
+        .active.item
+          img(src='http://placehold.it/1200x900')
+          .carousel-caption
+            h4 First Thumbnail label
+            p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+        .item 
+          img(src='http://placehold.it/1200x900')
+          .carousel-caption
+            h4 Second Thumbnail label
+            p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+        .item
+          img(src='http://placehold.it/1200x900')
+          .carousel-caption
+            h4 Thrida Thumbnail label
+            p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+      a.carousel-control.left(href='#myCarousel', data-slide='prev') ‹
+      a.carousel-control.right(href='#myCarousel', data-slide='next') ›

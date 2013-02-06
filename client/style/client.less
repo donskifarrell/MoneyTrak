@@ -3,12 +3,7 @@
 /* Styling UI sections to take up fullscreen */
 html, body {
     height: 100%;
-
-}
-
-.fill {
-    min-height: 100%;
-    position: relative;    
+    background-image: url('/images/foil.png');
 }
 
 .rfill {
@@ -24,11 +19,15 @@ html, body {
 .filler {
     background-color: inherit;
     bottom: 0;
-    content: "";
     position: absolute;
     top: 0;
     width: inherit;
-    z-index: -1;  
+}
+
+/* Styling Main */
+
+.main {
+    z-index: 0;
 }
 
 /* Styling Sidebar */
@@ -49,13 +48,6 @@ html, body {
 
 .side-header {
 	padding-left: 20px;
-}
-
-/* Styling Sidebar Content */
-/* Maybe put in separate css file */
-
-.side-content {
-	
 }
 
 /* Styling Footer */
