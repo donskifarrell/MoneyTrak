@@ -13,6 +13,18 @@ template(name='landing_page')
           a(href='#').head Hotspots
     .span1
 
-  .box.WarpShadow.WLarge.WNormal.InOutBar
-    #chart1
-      svg.discrete
+  .row-fluid
+    .span6
+      .box.WarpShadow.WLarge.WNormal.InOutBar
+        #chart1
+          svg.discrete
+    .span6
+      .box.WarpShadow.WLarge.WNormal.SpendPie
+        #chart2
+          svg.discrete
+
+  .row-fluid
+    .span12
+      .box.WarpShadow.WLarge.WNormal.HistoryBar
+        #chart3
+          svg.discrete
