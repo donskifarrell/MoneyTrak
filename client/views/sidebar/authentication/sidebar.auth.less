@@ -7,6 +7,17 @@
 	text-align: center;
 	margin-top: 25%;
 	margin-left: 10%;
+
+    @media only screen and (max-height : 790px) { 
+        margin-top: 1%;
+    } 
+
+    /* Styling Welcome header */
+    legend {
+        @media only screen and (max-height : 790px) { 
+            margin-bottom: 5%;
+        }        
+    }
 }
 
 /* Styling 'Or' separators */
@@ -16,7 +27,11 @@
     margin-top: 30px;
     position: relative;
     text-align: center;
-    z-index: 1;    
+    z-index: 1;
+
+    @media only screen and (max-height : 790px) { 
+        margin-top: 5%;
+    } 
 }
 
 .or:before {
@@ -37,6 +52,11 @@
 /* Styling Login Form */
 
 .login-form {
+
+    @media only screen and (max-height : 790px) { 
+        margin-bottom: -20%;
+    } 
+
 	.form-actions {
 		background-color: #fff !important;
 		border-top: 0px !important;
