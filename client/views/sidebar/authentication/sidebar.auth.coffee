@@ -2,119 +2,33 @@ Meteor.startup ->
   # for convenience
   loginButtonsSession = Accounts._loginButtonsSession
 
-  Template.user_account_form.events "click .toEnrollBtn": (e, tmpl) ->
-    e.preventDefault()
-    e.stopPropagation()
-    Session.set("has_account", false)
-
-  Template.user_account_form.events "click .toLoginBtn": (e, tmpl) ->
-    e.preventDefault()
-    e.stopPropagation()
-    Session.set("has_account", true)
-
-  Template.loggedIn.events "click #logout": (e, tmpl) ->
+  Template.logged_in.events "click #logout": (e, tmpl) ->
     Meteor.logout (err) ->
       if err
         # handle error
       else
         # something else
-
-  Template.user_account_form.has_account = ->
-    Session.equals("has_account", true)
   
   #
-  # loginButtonsLoggedOutDropdown template and related
+  # user_account_form template and related
   #
   Template.user_account_form.events
+    "click .toEnrollBtn": (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      loginButtonsSession.set('inSignupFlow', true);    
+
+    "click .toLoginBtn": (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      loginButtonsSession.set('inSignupFlow', false);
+
     "click #login-buttons-password": ->
       loginOrSignup()
 
-    "keypress #forgot-password-email": (event) ->
-      forgotPassword()  if event.keyCode is 13
-
-    "click #login-buttons-forgot-password": ->
-      forgotPassword()
-
-    "click #signup-link": ->
-      loginButtonsSession.resetMessages()
-      
-      # store values of fields before swtiching to the signup form
-      username = trimmedElementValueById("login-username")
-      email = trimmedElementValueById("login-email")
-      usernameOrEmail = trimmedElementValueById("login-username-or-email")
-      
-      # notably not trimmed. a password could (?) start or end with a space
-      password = elementValueById("login-password")
-      loginButtonsSession.set "inSignupFlow", true
-      loginButtonsSession.set "inForgotPasswordFlow", false
-      
-      # force the ui to update so that we have the approprate fields to fill in
-      Meteor.flush()
-      
-      # update new fields with appropriate defaults
-      if username isnt null
-        document.getElementById("login-username").value = username
-      else if email isnt null
-        document.getElementById("login-email").value = email
-      else if usernameOrEmail isnt null
-        if usernameOrEmail.indexOf("@") is -1
-          document.getElementById("login-username").value = usernameOrEmail
-        else
-          document.getElementById("login-email").value = usernameOrEmail
-      
-      # "login-password" is preserved, since password fields aren't updated by Spark.
-
-    "click #forgot-password-link": ->
-      loginButtonsSession.resetMessages()
-      
-      # store values of fields before swtiching to the signup form
-      email = trimmedElementValueById("login-email")
-      usernameOrEmail = trimmedElementValueById("login-username-or-email")
-      loginButtonsSession.set "inSignupFlow", false
-      loginButtonsSession.set "inForgotPasswordFlow", true
-      
-      # force the ui to update so that we have the approprate fields to fill in
-      Meteor.flush()
-      
-      # update new fields with appropriate defaults
-      if email isnt null
-        document.getElementById("forgot-password-email").value = email
-      else document.getElementById("forgot-password-email").value = usernameOrEmail  if usernameOrEmail.indexOf("@") isnt -1  if usernameOrEmail isnt null
-
-    "click #back-to-login-link": ->
-      loginButtonsSession.resetMessages()
-      username = trimmedElementValueById("login-username")
-      email = trimmedElementValueById("login-email") or trimmedElementValueById("forgot-password-email") # Ughh. Standardize on names?
-      loginButtonsSession.set "inSignupFlow", false
-      loginButtonsSession.set "inForgotPasswordFlow", false
-      
-      # force the ui to update so that we have the approprate fields to fill in
-      Meteor.flush()
-      document.getElementById("login-username").value = username  if document.getElementById("login-username")
-      document.getElementById("login-email").value = email  if document.getElementById("login-email")
-      
-      # "login-password" is preserved, since password fields aren't updated by Spark.
-      document.getElementById("login-username-or-email").value = email or username  if document.getElementById("login-username-or-email")
-
     "keypress #login-username, keypress #login-email, keypress #login-username-or-email, keypress #login-password, keypress #login-password-again": (event) ->
       loginOrSignup()  if event.keyCode is 13
-
   
-  # additional classes that can be helpful in styling the dropdown
-  Template.user_account_form.additionalClasses = ->
-    unless Accounts.password
-      false
-    else
-      if loginButtonsSession.get("inSignupFlow")
-        "login-form-create-account"
-      else if loginButtonsSession.get("inForgotPasswordFlow")
-        "login-form-forgot-password"
-      else
-        "login-form-sign-in"
-
-  Template.user_account_form.hasPasswordService = ->
-    Accounts._loginButtons.hasPasswordService()
-
   # return all login services, with password last
   Template.user_account_form.services = ->
     Accounts._loginButtons.getLoginServices()

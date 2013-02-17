@@ -1,13 +1,13 @@
-template(name='loginButtons')
+template(name='login_state')
   .side-auth
     {{#if currentUser}}
-      {{> loggedIn}}
+      {{> logged_in}}
     {{else}}
       legend Welcome!
-      {{> loggedOut}}
+      {{> logged_out}}
     {{/if}}
 
-template(name='loggedIn')
+template(name='logged_in')
   {{#if loggingIn}}
     li
       a Logging in...
@@ -26,7 +26,7 @@ template(name='loggedIn')
           a#logout Logout
   {{/if}}
 
-template(name='loggedOut')
+template(name='logged_out')
   {{> user_account_form}}
   p.or 
     span Or
@@ -44,32 +44,33 @@ template(name='user_account_form')
             .controls
               span.add-on
                 i.icon-user
-              input#login-email(type='text', placeholder='Username')
+              input#login-email(type='text', placeholder='Email')
           .control-group.input-prepend
             .controls
               span.add-on
                 i.icon-lock
               input#login-password(type='password', placeholder='Password')
+        {{#if inSignupFlow}}        
+          .control-group.input-prepend
+            .controls
+              span.add-on
+                i.icon-exclamation-sign
+              input#login-password-again(type='password', placeholder='Confirm Password')
           {{> _loginButtonsMessages}}
-        {{#if has_account}}
+          .form-actions
+            .span9.left-pull.enroll
+              p Already registered?
+                button.btn.btn-link.toLoginBtn Login here!
+            .span3
+              #login-buttons-password.btn.btn-primary(type='submit').enroll-button Register
+        {{else}}
+          {{> _loginButtonsMessages}}
           .form-actions
             .span9.left-pull
               p Haven't got an account?
                 button.btn.btn-link.toEnrollBtn Create one here!
             .span3
               #login-buttons-password.btn.btn-primary.login-button-form-submit.login-button Login
-        {{else}}
-          .control-group.input-prepend
-            .controls
-              span.add-on
-                i.icon-exclamation-sign
-              input#confpass(type='password', placeholder='Confirm Password')
-          .form-actions
-            .span9.left-pull.enroll
-              p Already registered?
-                button.btn.btn-link.toLoginBtn Login here!
-            .span3
-              #login-buttons-password.btn.btn-primary(type='submit').enrollBtn Register
         {{/if}}
 
 
