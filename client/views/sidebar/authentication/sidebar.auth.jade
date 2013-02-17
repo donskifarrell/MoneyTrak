@@ -38,25 +38,38 @@ template(name='logged_out')
     i.icon-user
 
 template(name='user_account_form')
+  {{#if inSignupFlow}}
+  p We need a few details to register you..
+  {{/if}}
   form.login-form
       fieldset
           .control-group.input-prepend
             .controls
               span.add-on
+                i.icon-user
+              input#login-username(type='text', placeholder='Username')
+        {{#if inSignupFlow}} 
+          .control-group.input-prepend
+            .controls
+              span.add-on
                 i.icon-envelope
               input#login-email(type='text', placeholder='Email')
+        {{/if}}
           .control-group.input-prepend
             .controls
               span.add-on
                 i.icon-lock
               input#login-password(type='password', placeholder='Password')
+        {{#unless inSignupFlow}}
+          button.btn.btn-link.toForgotPassBtn Forgotten password?
+        {{/unless}}
         {{#if inSignupFlow}}        
           .control-group.input-prepend
             .controls
               span.add-on
                 i.icon-exclamation-sign
               input#login-password-again(type='password', placeholder='Confirm Password')
-          {{> _loginButtonsMessages}}
+          {{> login_message}}
           .form-actions
             .span9.left-pull.enroll
               p Already registered?
@@ -64,7 +77,7 @@ template(name='user_account_form')
             .span3
               #login-buttons-password.btn.btn-primary(type='submit').enroll-button Register
         {{else}}
-          {{> _loginButtonsMessages}}
+          {{> login_message}}
           .form-actions
             .span9.left-pull
               p Haven't got an account?
@@ -73,4 +86,12 @@ template(name='user_account_form')
               #login-buttons-password.btn.btn-primary.login-button-form-submit.login-button Login
         {{/if}}
 
-
+template(name='login_message')
+  {{#if errorMessage}}  
+    .alert.alert-error
+      {{errorMessage}}
+  {{/if}}
+  {{#if infoMessage}}  
+    .alert.alert-info
+      {{infoMessage}}
+  {{/if}}

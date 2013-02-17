@@ -16,11 +16,13 @@ Meteor.startup ->
     "click .toEnrollBtn": (e) ->
       e.preventDefault()
       e.stopPropagation()
+      loginButtonsSession.resetMessages()
       loginButtonsSession.set('inSignupFlow', true);    
 
     "click .toLoginBtn": (e) ->
       e.preventDefault()
       e.stopPropagation()
+      loginButtonsSession.resetMessages()
       loginButtonsSession.set('inSignupFlow', false);
 
     "click #login-buttons-password": ->
@@ -309,3 +311,10 @@ Meteor.startup ->
     while n.nodeName isnt "BODY"
       n.style.zIndex = 1  if n.style.zIndex is 0
       n = n.parentNode
+
+  Template.login_message.errorMessage = ->
+    loginButtonsSession.get "errorMessage"
+
+  Template.login_message.infoMessage = ->
+    loginButtonsSession.get "infoMessage"
+
