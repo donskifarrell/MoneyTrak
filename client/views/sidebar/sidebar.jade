@@ -1,2 +1,13 @@
 template(name='sidebar_content')
   {{> login_state}}
+
+template(name='sidebar_user_details')
+  {{#if currentUser}}
+    {{#if loggingIn}}
+      p.alert.alert-success.logging-in Logging you in...
+    {{else}}
+      .logged-in
+        .alias {{currentUser.username}}
+        a.logout Logout
+    {{/if}}
+  {{/if}}

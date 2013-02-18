@@ -2,7 +2,7 @@ Meteor.startup ->
   # for convenience
   loginButtonsSession = Accounts._loginButtonsSession
 
-  Template.logged_in.events "click #logout": (e, tmpl) ->
+  Template.logged_in.events "click .logout": (e, tmpl) ->
     Meteor.logout (err) ->
       if err
         # handle error
