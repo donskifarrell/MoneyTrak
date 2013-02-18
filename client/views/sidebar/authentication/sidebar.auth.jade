@@ -8,22 +8,11 @@ template(name='login_state')
     {{/if}}
 
 template(name='logged_in')
-  {{#if loggingIn}}
-    li
-      a Logging in...
-  {{else}}
-    li
-      img.img-rounded(style='height: 32px; margin-top: 4px;', src='{{currentUser.profile.avatar_url}}')
-    li.dropdown
-      a.dropdown-toggle(href='#', data-toggle='dropdown')
-        {{currentUser.profile.login}}
-        b.caret
-      ul.dropdown-menu
-        li
-          a Account Settings
-        li.divider
-        li
-          a#logout Logout
+  {{#if currentUser}}
+    h4 Load data
+    h4 View graphs
+    h4 Manage Transactions
+    h4 View hotspots
   {{/if}}
 
 template(name='logged_out')

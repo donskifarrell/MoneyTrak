@@ -1,0 +1,6 @@
+template(name='main_content')
+  {{#if currentUser}}
+    h2 User content should be here
+  {{else}}
+    {{> landing_page}}
+  {{/if}}
