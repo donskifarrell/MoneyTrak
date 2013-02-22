@@ -1,49 +1,28 @@
 /* 
-    WARP SHADOW
-
+    WARP SHADOWS - Left, Right, Both Sides. 
+    
+    Modified From:
     http://bigpapi.shompton.net/~covidien/BioMed/css3-shadow-pack/Source/ 
 */
 
-/**  'smallBox' class for boxes with width between 150px - 350px  **/
-.smallBox.WarpShadow:before {
-    -moz-transform: rotate(8deg) skew(4deg);
-    -webkit-transform: rotate(8deg) skew(4deg);
-    -o-transform: rotate(8deg) skew(4deg);
-    transform: rotate(8deg) skew(4deg);
-}
-.WarpShadow:before, .WarpShadow:after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    bottom: 15px;
-    -moz-box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.7);
-    -webkit-box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.7);
-    box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.7);
-}
-.WarpShadow {
-    position: relative;
-    -moz-box-shadow: 0 14px 10px -12px rgba(0,0,0,0.7);
-    -webkit-box-shadow: 0 14px 10px -12px rgba(0,0,0,0.7);
-    box-shadow: 0 14px 10px -12px rgba(0,0,0,0.7);
-}
+
+/*** General Box Sizes ***/
+
 .WDark:before, .WDark:after {
     height: 15px;
 }
+/**  'smallBox' class for boxes with width between 150px - 350px  **/
 .smallBox.WLarge:before, .smallBox.WLarge:after {
     width: 130px;
 }
 .smallBox.WSmall:before, .smallBox.WSmall:after {
     width: 30px;
 }
+.smallBox.WMedium:before, .smallBox.WMedium:after {
+    width: 80px;
+}
 .WLarge:before, .WLarge:after {
     width: 350px;
-}
-.WarpShadow:before {
-    right: 10px;
-    -moz-transform: rotate(4deg) skew(4deg);
-    -webkit-transform: rotate(4deg) skew(4deg);
-    -o-transform: rotate(4deg) skew(4deg);
-    transform: rotate(4deg) skew(4deg);
 }
 .WLight:before, .WLight:after {
     height: 5px;
@@ -51,25 +30,74 @@
 .WMedium:before, .WMedium:after {
     width: 250px;
 }
-.WarpShadow:after {
-    left: 10px;
-    -moz-transform: rotate(-4deg) skew(-4deg);
-    -webkit-transform: rotate(-4deg) skew(-4deg);
-    -o-transform: rotate(-4deg) skew(-4deg);
-    transform: rotate(-4deg) skew(-4deg);
-}
 .WNormal:before, .WNormal:after {
     height: 10px;
 }
 .WSmall:before, .WSmall:after {
     width: 150px;
 }
-.smallBox.WarpShadow:after {
-    -moz-transform: rotate(-8deg) skew(-4deg);
-    -webkit-transform: rotate(-8deg) skew(-4deg);
-    -o-transform: rotate(-8deg) skew(-4deg);
-    transform: rotate(-8deg) skew(-4deg);
+
+/*** Left Warp Shadow ***/
+.WarpShadowLeft {
+    .WarpShadowBase;
+
+    &:after {
+        left: 10px;
+        .WarpShadowBaseTransform(-4deg);
+    }
 }
-.smallBox.WMedium:before, .smallBox.WMedium:after {
-    width: 80px;
+.smallBox.WarpShadowLeft:after {
+    .RotateSkewTransform(-8deg, -4deg);
+}
+
+/*** Right Warp Shadow ***/
+.WarpShadowRight {
+    .WarpShadowBase;
+
+    &:before {
+        right: 10px;
+        .WarpShadowBaseTransform(4deg);
+    }
+}
+.smallBox.WarpShadowRight:before {
+    .RotateSkewTransform(8deg, 4deg);
+}
+
+/*** Full Warp Shadow ***/
+.WarpShadow {
+    .WarpShadowLeft;
+    .WarpShadowRight;
+}
+.smallBox.WarpShadow {
+    &:before { .RotateSkewTransform(8deg, 4deg); }
+    &:after { .RotateSkewTransform(-8deg, -4deg); }
+}
+
+/*** Base Warp Shadow ***/
+
+@shadowBlack: rgba(0, 0, 0, 0.7);
+
+.WarpShadowBase {
+    position: relative;
+    -moz-box-shadow: 0 14px 10px -12px @shadowBlack;
+    -webkit-box-shadow: 0 14px 10px -12px @shadowBlack;
+    box-shadow: 0 14px 10px -12px @shadowBlack;
+}
+
+.WarpShadowBaseTransform(@degrees) {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 15px;
+    -moz-box-shadow: 0px 15px 15px @shadowBlack;
+    -webkit-box-shadow: 0px 15px 15px @shadowBlack;
+    box-shadow: 0px 15px 15px @shadowBlack;
+    .RotateSkewTransform(@degrees, @degrees);
+}
+
+.RotateSkewTransform(@rotate, @skew) {
+    -moz-transform: rotate(@rotate) skew(@skew);
+    -webkit-transform: rotate(@rotate) skew(@skew);
+    -o-transform: rotate(@rotate) skew(@skew);
+    transform: rotate(@rotate) skew(@skew);
 }
