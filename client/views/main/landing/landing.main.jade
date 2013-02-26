@@ -1,29 +1,19 @@
 template(name='landing_page')
-  .row-fluid
-    .span3
+  .row-fluid.section.header
     .span8
-      .span3
-        h4 
-          a(href='#').head.active Graphs
-      .span4
-        h4 
-          a(href='#').head Transactions
-      .span4
-        h4 
-          a(href='#').head Hotspots
-    .span1
+      h1 Get your money organised!
+      p.lead LifeChart will help you sort out your money.
 
-  .row-fluid
+  .row-fluid.section.blue.overview-graph
     .span6
-      .box.WarpShadowRight.WLarge.WNormal.InOutBar
+      .WarpShadowRight.WLarge.WNormal.box.InOutBar
         #chart1
           svg.discrete
     .span6
-      .box.WarpShadowLeft.WLarge.WNormal.SpendPie
-        #chart2
-          svg.discrete
+      .text-talk
+        p this is some geneeric rubbish
 
-  .row-fluid
+  .row-fluid.section.brown
     .span12
       .box.WarpShadow.WLarge.WNormal.HistoryBar
         #chart3

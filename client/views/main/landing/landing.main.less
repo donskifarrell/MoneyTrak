@@ -1,7 +1,14 @@
 /* Styling Landing Page */
 
+@brown: #585340;  
+@off-white: #b7ae9d;
+@white: #fafffc;
+@light-blue: #accecd;
+@red: #8a151b;
+@pinky: #bc6367; 
+
 .box {
-    border: 1px solid #C4C4C4;
+    border: 1px solid @off-white;
     background-color: #fff; 
     box-shadow: 0px 2px 8px #231F20;
     -webkit-box-shadow: 0px 2px 8px #231F20;
@@ -11,8 +18,7 @@
     &.InOutBar {
         height: 30%;
         width: 80%;
-        margin-top: 8%;
-        margin-left: 8%;
+        margin-top: 2%;
     }
 
     &.SpendPie {
@@ -44,4 +50,23 @@ a.head {
     &.active {
         border-bottom: 0.16em solid #1EBA1E;
     }
+}
+
+/* Styling Rows */
+
+.section {
+    border-bottom: 1px solid #CECECE;
+    z-index: -3;
+    position: relative;
+
+    &.brown {
+        background-color: @brown;        
+        height: 243px;
+    }
+
+    &.blue {
+        background-color: @light-blue;        
+        height: 243px;
+    }
+
 }

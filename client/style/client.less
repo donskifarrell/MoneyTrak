@@ -1,5 +1,13 @@
 /* CSS declarations go here */
 
+@brown: #585340;  
+@off-white: #b7ae9d;
+@white: #fafffc;
+@light-blue: #accecd;
+@red: #8a151b;
+@pinky: #bc6367; 
+
+
 /* Styling UI sections to take up fullscreen */
 html, body {
     height: 100%;
@@ -37,17 +45,23 @@ p, h4 {
 
 .main {
     z-index: 0;
+    background-color: white;
+    border: 1px solid #CECECE;      
+    box-shadow: 1px #231F20;
+    margin-right: 1.1%;
+    margin-top: 3%;
 }
 
 /* Styling Sidebar */
 
 .sidebar {
-    background-color: white;
-    border-right: 1px solid #929292;    
+    background-color: @white;
+    border-right: 1px solid #929292;
     box-shadow: 0px 4px 20px #231F20;
     -webkit-box-shadow: 0px 4px 20px #231F20;
     -mox-box-shadow: 0px 4px 20px #231F20;
     min-width: 304px;
+    z-index: 10;
 }
 
 .wrap {
