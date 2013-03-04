@@ -8,6 +8,7 @@ template(name='sidebar_user_details')
     {{else}}
       .logged-in
         .alias {{currentUser.username}}
-        a.logout Logout
+        p Not you? 
+          a.logout Logout
     {{/if}}
   {{/if}}
