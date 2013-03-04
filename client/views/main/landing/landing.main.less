@@ -1,14 +1,16 @@
 /* Styling Landing Page */
 
 @brown: #585340;  
-@off-white: #b7ae9d;
-@white: #fafffc;
+@light-white: #b7ae9d;
+@off-white: #fafffc;
 @light-blue: #accecd;
 @red: #8a151b;
-@pinky: #bc6367; 
+@pinky: #bc6367;
+@cool-blue: #EAF7FE;
+@darkcool-blue: #245E8A;
 
 .box {
-    border: 1px solid @off-white;
+    border: 1px solid @red;
     background-color: #fff; 
     box-shadow: 0px 2px 8px #231F20;
     -webkit-box-shadow: 0px 2px 8px #231F20;
@@ -59,10 +61,21 @@ a.head {
     z-index: -3;
     position: relative;
 
+    &.header {
+        background-color: @cool-blue;        
+        height: 243px;
+    }
+
     &.brown {
         background-color: @brown;        
         height: 243px;
     }
+
+    &.darkcool {
+        background-color: @darkcool-blue;        
+        height: 243px;
+    }
+
 
     &.blue {
         background-color: @light-blue;        
