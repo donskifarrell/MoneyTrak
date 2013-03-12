@@ -8,6 +8,13 @@
 @pinky: #bc6367;
 @cool-blue: #EAF7FE;
 @darkcool-blue: #245E8A;
+@darkcool-green: #245364;
+//@darkcool-bluey: #245D8E;
+//@lightcool-blue: #75A2C7;
+
+
+@blue1: #EAF7FE;
+@blue2: #75A2C7;
 
 .box {
     border: 1px solid @red;
@@ -57,11 +64,21 @@ a.head {
 /* Styling Rows */
 
 .section {
-    border-bottom: 1px solid #CECECE;
+    
     z-index: -3;
     position: relative;
 
-    &.header {
+    &.blue1 {
+        background-color: @blue1;        
+        height: 243px;
+    }
+
+    &.blue2 {
+        background-color: @blue2;        
+        height: 243px;
+    }
+
+    &.coolblue {
         background-color: @cool-blue;        
         height: 243px;
     }
@@ -82,4 +99,25 @@ a.head {
         height: 243px;
     }
 
+    &.offwhite {
+        background-color: @off-white;        
+        height: 243px;
+    }
+
+}
+
+.stylish {
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 66px;
+    border: 4px double #ccc;
+    font-size: 20px;
+    color: #666;
+    line-height: 100px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fff;
+    background: #ddd;
+    margin-left: 50%;
 }

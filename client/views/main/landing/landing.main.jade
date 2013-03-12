@@ -1,10 +1,12 @@
 template(name='landing_page')
-  .row-fluid.section.header
+  .row-fluid.section.blue1
+    .span1
+      a.stylish Hi
     .span8
       h1 Get your money organised!
       p.lead LifeChart will help you sort out your money.
 
-  .row-fluid.section.blue.overview-graph
+  .row-fluid.section.blue2.overview-graph
     .span6
       .WarpShadowRight.WLarge.WNormal.box.InOutBar
         #chart1
@@ -13,8 +15,13 @@ template(name='landing_page')
       .text-talk
         p this is some geneeric rubbish
 
-  .row-fluid.section.darkcool
+  .row-fluid.section.blue1
     .span12
       .box.WarpShadow.WLarge.WNormal.HistoryBar
         #chart3
           svg.discrete
+
+  .row-fluid.section.blue2
+    .span12
+      .box.WarpShadow.WLarge.WNormal.HistoryBar
+        #chart3
