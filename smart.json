@@ -1,5 +1,8 @@
 {
   "packages": {
-    "jade-handlebars": {}
+    "jade-handlebars": {},
+    "chartjs" : {
+      "path": "/home/donski/dev/meteor-chartjs"
+    }
   }
 }
