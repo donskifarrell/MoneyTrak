@@ -7,7 +7,8 @@
   "dependencies": {
     "basePackages": {
       "jade-handlebars": {},
-      "chartjs": {}
+      "chartjs": {},
+      "filepicker": {}
     },
     "packages": {
       "jade-handlebars": {
@@ -19,6 +20,11 @@
         "git": "https://github.com/donskifarrell/meteor-chartjs.git",
         "tag": "v0.0.1",
         "commit": "105f1ff6a4291030a88f23ba1e1ae1786235e444"
+      },
+      "filepicker": {
+        "git": "https://github.com/Filepicker/meteor.git",
+        "tag": "v0.2.0",
+        "commit": "1ae688ad1abfbe6777c465e11a0d5287ad9e4d4a"
       }
     }
   }
