@@ -12,8 +12,19 @@ Meteor.startup ->
                 filepicker.read(
                     FPFile, 
                     (data) ->
-                        console.log(data);
-                    );
+                        parseCsvFile(data)
+                    )
             , (FPError) ->
-                console.log(FPError.toString());
+                console.log(FPError.toString())
         );
+
+    parseCsvFile = (csvData) ->
+        data = $.csv.toObjects(
+            csvData,
+            {
+                "headerIndex": 2,
+                "start": 3
+            }
+        );
+        console.log data
+

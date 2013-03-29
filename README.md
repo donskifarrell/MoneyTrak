@@ -7,6 +7,7 @@ Follow these rules for project specific cases. Use other dependencies convention
 * Template names are separated by underscore '_'
 * Template variables use CamelCase
 * Class names / ID's separated by dashes '-'
+* Function names start with lower case and use CamelCase for rest of name.
 
 # Options for bank scrapers:
 
@@ -25,6 +26,7 @@ Follow these rules for project specific cases. Use other dependencies convention
 
 * http://www.webappers.com/2010/03/09/15-best-free-online-tools-for-web-design-development/
 * Better file picker: https://github.com/blueimp/jQuery-File-Upload
+* Jquery-csv also does file upload
 
 # Filepicker
 API Key: Acx6unRqUSRK0I5s3NvEgz
