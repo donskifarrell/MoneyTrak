@@ -8,7 +8,8 @@
     "basePackages": {
       "jade-handlebars": {},
       "chartjs": {},
-      "filepicker": {}
+      "filepicker": {},
+      "jquery-csv": {}
     },
     "packages": {
       "jade-handlebars": {
@@ -25,6 +26,11 @@
         "git": "https://github.com/Filepicker/meteor.git",
         "tag": "v0.2.0",
         "commit": "1ae688ad1abfbe6777c465e11a0d5287ad9e4d4a"
+      },
+      "jquery-csv": {
+        "git": "https://github.com/donskifarrell/meteor-jquery-csv.git",
+        "tag": "v0.7.0",
+        "commit": "4bcf54a15ff411bb5db7e3646d45d922bcbc5896"
       }
     }
   }

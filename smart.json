@@ -2,6 +2,7 @@
   "packages": {
     "jade-handlebars": {},
     "chartjs": {},
-    "filepicker": {}
+    "filepicker": {},
+    "jquery-csv": {}
   }
 }

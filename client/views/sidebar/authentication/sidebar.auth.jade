@@ -9,10 +9,7 @@ template(name='login_state')
 
 template(name='logged_in')
   {{#if currentUser}}
-    h4 Load data
-    h4 View graphs
-    h4 Manage Transactions
-    h4 View hotspots
+    {{> navigation_menu}}
   {{/if}}
 
 template(name='logged_out')
