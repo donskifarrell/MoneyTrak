@@ -1,5 +1,16 @@
 Meteor.startup ->
 
+    Template.navigation_menu.events 
+        "click .nav-import": (e, tmpl) ->
+            Session.set("navMenuSelection", "import-data")
+
+        "click .nav-transactions": (e, tmpl) ->
+            Session.set("navMenuSelection", "transactions-view")
+
+        "click .nav-graph": (e, tmpl) ->
+            Session.set("navMenuSelection", "graph-view")
+
+
     Template.navigation_menu.events "click .loadCsv": (e, tmpl) ->
         filepicker.setKey('Acx6unRqUSRK0I5s3NvEgz');
         filepicker.pick(
@@ -13,6 +24,7 @@ Meteor.startup ->
                     FPFile, 
                     (data) ->
                         parseCsvFile(data)
+                        Session.set("navMenuSelection", "transactions-view")
                     )
             , (FPError) ->
                 console.log(FPError.toString())

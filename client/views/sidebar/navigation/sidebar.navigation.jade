@@ -10,7 +10,8 @@ template(name='navigation_menu')
     .accordion#nav-menu
         .accordion-group
             .accordion-heading
-              a.accordion-toggle(data-toggle='collapse', 
+              a.accordion-toggle.nav-import(
+                                data-toggle='collapse', 
                                 data-parent='#nav-menu', 
                                 href='#import-data')
                 | Import Financial Data
@@ -20,7 +21,8 @@ template(name='navigation_menu')
                 button.btn.loadCsv Load CSV file
         .accordion-group
             .accordion-heading
-              a.accordion-toggle(data-toggle='collapse', 
+              a.accordion-toggle.nav-transactions(
+                                data-toggle='collapse', 
                                 data-parent='#nav-menu', 
                                 href='#transactions-view')
                 | Transactions View
@@ -30,7 +32,8 @@ template(name='navigation_menu')
                 | 1 millions transactions!
         .accordion-group
             .accordion-heading
-              a.accordion-toggle(data-toggle='collapse', 
+              a.accordion-toggle.nav-graph(
+                                data-toggle='collapse', 
                                 data-parent='#nav-menu', 
                                 href='#graph-view')
                 | Graph View

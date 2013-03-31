@@ -3,6 +3,7 @@
     "jade-handlebars": {},
     "chartjs": {},
     "filepicker": {},
-    "jquery-csv": {}
+    "jquery-csv": {},
+    "handlebar-helpers": {}
   }
 }
