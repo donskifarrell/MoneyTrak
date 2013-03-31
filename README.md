@@ -30,3 +30,7 @@ Follow these rules for project specific cases. Use other dependencies convention
 
 # Filepicker
 API Key: Acx6unRqUSRK0I5s3NvEgz
+
+
+# TODOs:
+* convert csv dates to actual dates + update validation

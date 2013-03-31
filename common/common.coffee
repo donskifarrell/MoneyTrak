@@ -35,30 +35,38 @@ Transactions.allow
     transaction.owner is userId
 
 Meteor.methods
-  addTransaction: (options) ->
+  addTransactions: (options) ->
     options = options or {}
     throw new Meteor.Error(403, "You must be logged in") unless @userId
-    throw new Meteor.Error(400, "Required parameter missing") unless (
-      typeof options.date is "Date" and options.date.length and 
-      typeof options.transaction_type is "string" and options.transaction_type.length and 
-      typeof options.description is "string" and options.description.length and
-      typeof options.value is "number" and options.value.length and 
-      typeof options.balance is "number" and options.balance.length and 
-      typeof options.account_name is "string" and options.account_name.length and 
-      typeof options.account_number is "number" and options.account_number.length 
+    throw new Meteor.Error(400, "Required array parameter missing") unless (
+      Object.prototype.toString.call( options.transactions ) == '[object Array]' and 
+      options.transactions.length
     )
-    throw new Meteor.Error(413, "Description too long") if options.description.length > 1000
+    Meteor.call('addTransaction', transaction) for transaction in options.transactions 
+
+  addTransaction: (transaction) ->
+    transaction = transaction or {}
+    throw new Meteor.Error(403, "You must be logged in") unless @userId
+    throw new Meteor.Error(400, "Required parameter missing") unless (
+      typeof transaction.Date is "string" and transaction.Date.length > 0 and
+      typeof transaction.Description is "string" and transaction.Description.length > 0 and
+      typeof transaction.Value is "number" and 
+      typeof transaction.Balance is "number" and 
+      typeof transaction["Account Name"] is "string" and transaction["Account Name"].length > 0 and 
+      typeof transaction["Account Number"] is "string" and transaction["Account Number"].length > 0 
+    )
+    throw new Meteor.Error(413, "Transaction description is too long") if transaction.Description.length > 1000
 
     Transactions.insert
       owner: @userId
-      date: options.date
-      transaction_type: options.transaction_type
-      description: options.description
-      tags: options.tags
-      value: options.value
-      balance: options.balance
-      account_name: options.account_name
-      account_number: options.account_number
+      date: transaction.Date
+      transaction_type: transaction.Type
+      description: transaction.Description
+      tags: transaction.Tags
+      value: transaction.Value
+      balance: transaction.Balance
+      account_name: transaction["Account Name"]
+      account_number: transaction["Account Number"]
 
 #/////////////////////////////////////////////////////////////////////////////
 # Users

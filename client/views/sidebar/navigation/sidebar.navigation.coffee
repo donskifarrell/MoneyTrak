@@ -23,8 +23,21 @@ Meteor.startup ->
             csvData,
             {
                 "headerIndex": 2,
-                "start": 3
+                "start": 3,
+                onParseValue: parseCsvValue
             }
         );
         console.log data
+        Meteor.call(
+            'addTransactions',
+            {
+                transactions: data
+            }
+        );
+
+    parseCsvValue = (value) ->
+        # Replace strings that have prevailing or trailing whitespace, 
+        # or a ' at the start. Then convert to a number if valid.
+        trimmedValue = value.replace(/^[\s+'?]|\s+$/g, "");
+        return $.csv.hooks.castToScalar trimmedValue, ""
 
