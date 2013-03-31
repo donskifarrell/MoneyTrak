@@ -1,6 +1,33 @@
 template(name='main_content')
   {{#if currentUser}}
-    h2 User content should be here
+    {{#if isImportData}}
+        {{> import_data}}
+    {{/if}}
+    {{#if isTransactionView}}
+        {{> transactions_view}}
+    {{/if}}
+    {{#if isGraphView}}
+        {{> graph_view}}
+    {{/if}}
+    {{#if isLocationView}}
+        {{> location_view}}
+    {{/if}}
   {{else}}
     {{> landing_page}}
   {{/if}}
+
+template(name='import_data')
+    h2 Import Data
+    hr
+
+template(name='transactions_view')
+    h2 Transactions
+    hr
+
+template(name='graph_view')
+    h2 Finance Overview
+    hr
+
+template(name='location_view')
+    h2 Location Overview
+    hr

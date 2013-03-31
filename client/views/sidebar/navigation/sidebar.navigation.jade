@@ -1,7 +1,39 @@
-template(name='navigation_menu')
+template(name='navigation_menu2')
     h2 Navigation:
     h4 Load data
         button.btn.loadCsv Load CSV file
     h4 View graphs
     h4 Manage Transactions
     h4 View hotspots
+
+template(name='navigation_menu')
+    .accordion#nav-menu
+        .accordion-group
+            .accordion-heading
+              a.accordion-toggle(data-toggle='collapse', 
+                                data-parent='#nav-menu', 
+                                href='#import-data')
+                | Import Financial Data
+            #import-data.accordion-body.collapse.in
+              .accordion-inner
+                | Load a .csv file into the tool:
+                button.btn.loadCsv Load CSV file
+        .accordion-group
+            .accordion-heading
+              a.accordion-toggle(data-toggle='collapse', 
+                                data-parent='#nav-menu', 
+                                href='#transactions-view')
+                | Transactions View
+            #transactions-view.accordion-body.collapse
+              .accordion-inner
+                | Transactions summary
+                | 1 millions transactions!
+        .accordion-group
+            .accordion-heading
+              a.accordion-toggle(data-toggle='collapse', 
+                                data-parent='#nav-menu', 
+                                href='#graph-view')
+                | Graph View
+            #graph-view.accordion-body.collapse
+              .accordion-inner
+                | Graphs list
