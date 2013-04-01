@@ -19,7 +19,7 @@
 Transactions = new Meteor.Collection("transactions")
 Transactions.allow
   insert: (userId, transaction) ->
-    false # no inserts -- use addTransaction method
+    true # no inserts -- use addTransaction method
 
   update: (userId, transaction, fields, modifier) ->
     return false if userId isnt transaction.owner # not the owner

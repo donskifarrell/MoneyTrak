@@ -1,0 +1,25 @@
+template(name='transactions_view')
+    h2 Transactions
+    hr
+    table.table.table-striped
+        thead
+            tr
+                td Date
+                td Transaction Type
+                td Description
+                td Value
+                td Balance
+                td Account Name
+                td Account Number
+    {{#each transactionList}}
+        tbody
+            tr
+                td date
+                td transaction_type
+                td description
+                td value
+                td balance
+                td account_name
+                td account_number
+    {{/each}}
+
