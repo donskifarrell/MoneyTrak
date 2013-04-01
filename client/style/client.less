@@ -1,12 +1,5 @@
-/* CSS declarations go here */
 
-@brown: #585340;  
-@off-white: #b7ae9d;
-@white: #fafffc;
-@light-blue: #accecd;
-@red: #8a151b;
-@pinky: #bc6367; 
-
+@import "colours.less";
 
 /* Styling UI sections to take up fullscreen */
 html, body {
@@ -34,7 +27,6 @@ p, h4 {
 }
 
 .filler {
-    background-color: inherit;
     bottom: 0;
     position: absolute;
     top: 0;
@@ -50,37 +42,6 @@ p, h4 {
     box-shadow: 1px #231F20;
     margin-right: 1.1%;
     margin-top: 3%;
-}
-
-/* Styling Sidebar */
-
-.sidebar {
-    background-color: @white;
-    border-right: 1px solid #929292;
-    box-shadow: 0px 4px 20px #231F20;
-    -webkit-box-shadow: 0px 4px 20px #231F20;
-    -mox-box-shadow: 0px 4px 20px #231F20;
-    min-width: 304px;
-    z-index: 10;
-}
-
-.wrap {
-	min-height: 99%;
-}
-
-/* Styling Header */
-
-.side-header {
-	padding-left: 20px;
-    display: block;
-}
-
-/* Styling Footer */
-
-.side-footer {
-	background-color: #fff;
-	margin-top: -180px; /* negative value of footer height */
-	height: 140px;
 }
 
 /* Styling General Elements */
