@@ -59,7 +59,9 @@ Meteor.methods
 
     Transactions.insert
       owner: @userId
-      date: transaction.Date
+      date: new Date(transaction.Date.split('/')[2], 
+                    transaction.Date.split('/')[1] - 1, 
+                    transaction.Date.split('/')[0])
       transaction_type: transaction.Type
       description: transaction.Description
       tags: transaction.Tags
