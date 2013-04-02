@@ -51,4 +51,3 @@ Meteor.startup ->
         # or a ' at the start. Then convert to a number if valid.
         trimmedValue = value.replace(/^[\s+'?]|\s+$/g, "");
         return $.csv.hooks.castToScalar trimmedValue, ""
-
