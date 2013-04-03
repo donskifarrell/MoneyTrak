@@ -1,6 +1,63 @@
 template(name='graph_view')
     h2 Financial Overview
     hr
+    .row-fluid
+        .span2.options
+            button.btn.refresh Refresh
+            hr
+            p scaleOverlay
+                input#scaleOverlay(type='text', value="false")
+            p scaleOverride
+                input#scaleOverride(type='text', value="false")
+            p scaleSteps
+                input#scaleSteps(type='text', value="null")
+            p scaleStepWidth
+                input#scaleStepWidth(type='text', value="null")
+            p scaleStartValue
+                input#scaleStartValue(type='text', value="null")
+            p scaleLineColor
+                input#scaleLineColor(type='text', value="rgba(0,0,0,.1)")
+            p scaleLineWidth
+                input#scaleLineWidth(type='text', value="1")
+            p scaleShowLabels
+                input#scaleShowLabels(type='text', value="true")
+            p scaleLabel
+                input#scaleLabel(type='text', value="<%=value%>")
+            p scaleFontFamily
+                input#scaleFontFamily(type='text', value="false")
+            p scaleFontSize
+                input#scaleFontSize(type='text', value="12")
+            p scaleFontStyle
+                input#scaleFontStyle(type='text', value="false")
+            p scaleFontColor
+                input#scaleFontColor(type='text', value="false")
+            p scaleShowGridLines
+                input#scaleShowGridLines(type='text', value="true")
+            p scaleGridLineColor
+                input#scaleGridLineColor(type='text', value="false")
+            p scaleGridLineWidth
+                input#scaleGridLineWidth(type='text', value="1")
+            p bezierCurve
+                input#bezierCurve(type='text', value="true")
+            p pointDot
+                input#pointDot(type='text', value="true")
+            p pointDotRadius
+                input#pointDotRadius(type='text', value="4")
+            p pointDotStrokeWidth
+                input#pointDotStrokeWidth(type='text', value="2")
+            p datasetStroke
+                input#datasetStroke(type='text', value="true")
+            p datasetStrokeWidth
+                input#datasetStrokeWidth(type='text', value="2")
+            p datasetFill
+                input#datasetFill(type='text', value="false")
+            p animation
+                input#animation(type='text', value="true")
+            p animationSteps
+                input#animationSteps(type='text', value="60")
+            p animationEasing
+                input#animationEasing(type='text', value="null")
 
-    canvas#lineChart.linehcart(width="900",height="900")
+        .span10
+            canvas#lineChart.linehcart(width="900",height="900")
 
