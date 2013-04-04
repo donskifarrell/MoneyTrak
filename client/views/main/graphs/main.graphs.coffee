@@ -15,7 +15,20 @@ Meteor.startup ->
         chart = new Chart(chartCanvas).Line(spendingData, options)
 
     spendingData = {
-        labels : dates,
+        labels : [
+            'January', 
+            'February', 
+            'March', 
+            'April', 
+            'May', 
+            'June', 
+            'July', 
+            'August', 
+            'September', 
+            'October', 
+            'November', 
+            'December', 
+            ],
         datasets : [
             {
                 fillColor : "rgba(220,220,220,0.5)",
@@ -39,7 +52,6 @@ Meteor.startup ->
                     $lt: toDate
                 }
             },
-            limit: 20
         ).forEach( 
             (transaction) ->
                 dates.push transaction.account_name
