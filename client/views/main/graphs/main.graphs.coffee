@@ -1,18 +1,87 @@
 Meteor.startup ->
-    dates = []
-    balances = []
+    yearSpending = [];
+    monthValueStore = undefined;
 
     Template.graph_view.events
         "click .refresh": (e, tmpl) ->
-            renderSpendingChart(LineOptions());
+            renderSpendingChart({});
 
     Template.graph_view.rendered = ->
         renderSpendingChart({});
 
     renderSpendingChart = (options) ->
-        getSpending()
-        chartCanvas = $("#lineChart")[0].getContext("2d")
-        chart = new Chart(chartCanvas).Line(spendingData, options)
+        nv.addGraph createSpendingChart();
+    
+    createSpendingChart = ->
+        chart = nv
+                .models
+                .cumulativeLineChart()
+                .color(
+                    d3.scale.category10().range()
+                )
+                .clipVoronoi(false)
+
+        d3.select(".spending svg").datum(getYearSpending()).call(chart)
+
+        nv.utils.windowResize(chart.update)
+
+        chart.dispatch.on(
+            "stateChange", 
+            (e) ->
+                nv.log("New State:", JSON.stringify(e))
+        )
+
+        chart
+
+    getYearSpending = ->
+        toDate = new Date()
+        fromDate = new Date().setMonth(toDate.getMonth()-12)
+
+        yearSpending.length = 0;
+        monthValueStore = GetMonthValueStore();
+
+        transactions = Transactions.find(
+            {
+                owner: Meteor.userId(),
+                date: {
+                    $gte: fromDate,
+                    $lt: toDate
+                }
+            },
+        ).forEach( 
+            (transaction) ->
+                monthValueStore[transaction.date.getMonthName()]
+                    .push [transaction.date, transaction.balance]
+        )
+
+        for key of monthValueStore
+          yearSpending.push(buildMonthData(key)) if monthValueStore.hasOwnProperty(key)
+
+        yearSpending
+
+    buildMonthData = (month) ->
+            key: month
+            values: monthValueStore[month],
+
+    GetMonthValueStore = ->
+        months =
+            August:     [], 
+            September:  [], 
+            October:    [], 
+            November:   [], 
+            December:   [],
+
+
+
+
+            ###            January:    [], 
+            February:   [], 
+            March:      [], 
+            April:      [], 
+            May:        [], 
+            June:       [], 
+            July:       [], ###
+###
 
     spendingData = {
         labels : [
@@ -38,25 +107,6 @@ Meteor.startup ->
         ]
     }
 
-    getSpending = ->
-        toDate = new Date()
-        fromDate = new Date().setMonth(toDate.getMonth()-12)
-        dates.length = 0;
-        balances.length = 0;
-
-        transactions = Transactions.find(
-            {
-                owner: Meteor.userId(),
-                date: {
-                    $gte: fromDate,
-                    $lt: toDate
-                }
-            },
-        ).forEach( 
-            (transaction) ->
-                dates.push transaction.account_name
-                balances.push transaction.balance
-        )
 
     LineOptions = ->
         values =
@@ -87,3 +137,4 @@ Meteor.startup ->
             animationSteps: parseInt($('#animationSteps').val())
             animationEasing: "easeOutQuart"
             onAnimationComplete: null
+            ###

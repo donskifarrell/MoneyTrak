@@ -14,7 +14,6 @@ accounts-google
 accounts-twitter
 accounts-password
 accounts-ui-unstyled
-chartjs
 filepicker
 jquery-csv
 handlebar-helpers
