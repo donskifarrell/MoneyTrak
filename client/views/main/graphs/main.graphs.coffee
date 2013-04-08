@@ -1,6 +1,19 @@
 Meteor.startup ->
     yearSpending = [];
-    monthValueStore = undefined;
+    dailyValueStore = {};
+
+    ###
+        Outline of chart data structure:
+        [
+            {
+                key: "Label of each separate line in chart"
+                values: [
+                    [ X, Y ], ...
+                ]
+            },
+            ...
+        ]
+    ###
 
     Template.graph_view.events
         "click .refresh": (e, tmpl) ->
@@ -15,11 +28,26 @@ Meteor.startup ->
     createSpendingChart = ->
         chart = nv
                 .models
-                .cumulativeLineChart()
-                .color(
-                    d3.scale.category10().range()
+                .lineChart()                
+                .x((dataPoint) ->
+                    dataPoint[0] 
                 )
-                .clipVoronoi(false)
+                .y((dataPoint) ->
+                    dataPoint[1]
+                )
+
+        chart.yAxis
+               .axisLabel('Spend')
+               .tickFormat( (value) ->
+                    return value
+                )
+
+        chart.xAxis
+               .axisLabel('Date')
+               .rotateLabels(-45)
+               .tickFormat( (date) ->
+                    d3.time.format('%b %d')(new Date(date))
+                )
 
         d3.select(".spending svg").datum(getYearSpending()).call(chart)
 
@@ -38,7 +66,7 @@ Meteor.startup ->
         fromDate = new Date().setMonth(toDate.getMonth()-12)
 
         yearSpending.length = 0;
-        monthValueStore = GetMonthValueStore();
+        dailyValueStore = {};
 
         transactions = Transactions.find(
             {
@@ -50,91 +78,24 @@ Meteor.startup ->
             },
         ).forEach( 
             (transaction) ->
-                monthValueStore[transaction.date.getMonthName()]
-                    .push [transaction.date, transaction.balance]
+                if dailyValueStore.hasOwnProperty(transaction.date)
+                    dailyValueStore[transaction.date] += transaction.value
+                else                 
+                    dailyValueStore[transaction.date] = transaction.balance
         )
 
-        for key of monthValueStore
-          yearSpending.push(buildMonthData(key)) if monthValueStore.hasOwnProperty(key)
-
-        yearSpending
-
-    buildMonthData = (month) ->
-            key: month
-            values: monthValueStore[month],
-
-    GetMonthValueStore = ->
-        months =
-            August:     [], 
-            September:  [], 
-            October:    [], 
-            November:   [], 
-            December:   [],
-
-
-
-
-            ###            January:    [], 
-            February:   [], 
-            March:      [], 
-            April:      [], 
-            May:        [], 
-            June:       [], 
-            July:       [], ###
-###
-
-    spendingData = {
-        labels : [
-            'January', 
-            'February', 
-            'March', 
-            'April', 
-            'May', 
-            'June', 
-            'July', 
-            'August', 
-            'September', 
-            'October', 
-            'November', 
-            'December', 
-            ],
-        datasets : [
-            {
-                fillColor : "rgba(220,220,220,0.5)",
-                strokeColor : "red",
-                data : balances
-            }
+        for key of dailyValueStore
+          yearSpending.push [
+            new Date(key),
+            sumDailyBalance(key) if dailyValueStore.hasOwnProperty(key)
+          ]
+        
+        return [
+            key: "Year Spend",
+            values: yearSpending
         ]
-    }
-
-
-    LineOptions = ->
-        values =
-            scaleOverlay: $('#scaleOverlay').val() == 'true'
-            scaleOverride: $('#scaleOverride').val() == 'true'
-            scaleSteps: parseInt($('#scaleSteps').val())
-            scaleStepWidth: parseInt($('#scaleStepWidth').val())
-            scaleStartValue: parseInt($('#scaleStartValue').val())
-            scaleLineColor: $('#scaleLineColor').val()
-            scaleLineWidth: parseInt($('#scaleLineWidth').val())
-            scaleShowLabels: $('#scaleShowLabels').val() == 'true'
-            scaleLabel: $('#scaleLabel').val()
-            scaleFontFamily: "'Arial'"
-            scaleFontSize: parseInt($('#scaleFontSize').val())
-            scaleFontStyle: "normal"
-            scaleFontColor: "#666"
-            scaleShowGridLines: $('#scaleShowGridLines').val() == 'true'
-            scaleGridLineColor: "rgba(0,0,0,.05)"
-            scaleGridLineWidth: parseInt($('#scaleGridLineWidth').val())
-            bezierCurve: $('#bezierCurve').val() == 'true'
-            pointDot: $('#pointDot').val() == 'true'
-            pointDotRadius: parseInt($('#pointDotRadius').val())
-            pointDotStrokeWidth: parseInt($('#pointDotStrokeWidth').val())
-            datasetStroke: $('#datasetStroke').val() == 'true'
-            datasetStrokeWidth: parseInt($('#datasetStrokeWidth').val())
-            datasetFill: $('#datasetFill').val() == 'true'
-            animation: $('#animation').val() == 'true'
-            animationSteps: parseInt($('#animationSteps').val())
-            animationEasing: "easeOutQuart"
-            onAnimationComplete: null
-            ###
+       
+    sumDailyBalance = (date) ->
+        balance = 0
+        balance += value for value in dailyValueStore[date]
+        return balance
