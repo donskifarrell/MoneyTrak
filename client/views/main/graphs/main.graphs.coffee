@@ -56,9 +56,8 @@ Meteor.startup ->
         chart.dispatch.on(
             "stateChange", 
             (e) ->
-                nv.log("New State:", JSON.stringify(e))
+                nv.log("New Chart State:", JSON.stringify(e))
         )
-
         chart
 
     getYearSpending = ->
@@ -87,15 +86,11 @@ Meteor.startup ->
         for key of dailyValueStore
           yearSpending.push [
             new Date(key),
-            sumDailyBalance(key) if dailyValueStore.hasOwnProperty(key)
+            dailyValueStore[key] if dailyValueStore.hasOwnProperty(key)
           ]
         
         return [
             key: "Year Spend",
             values: yearSpending
         ]
-       
-    sumDailyBalance = (date) ->
-        balance = 0
-        balance += value for value in dailyValueStore[date]
-        return balance
+
