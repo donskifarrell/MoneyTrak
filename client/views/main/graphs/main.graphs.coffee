@@ -1,26 +1,71 @@
 Meteor.startup ->
-    dates = []
-    balances = []
+    yearSpending = [];
+    dailyValueStore = {};
+
+    ###
+        Outline of chart data structure:
+        [
+            {
+                key: "Label of each separate line in chart"
+                values: [
+                    [ X, Y ], ...
+                ]
+            },
+            ...
+        ]
+    ###
+
+    Template.graph_view.events
+        "click .refresh": (e, tmpl) ->
+            renderSpendingChart({});
 
     Template.graph_view.rendered = ->
-        getSpending()
-        chartCanvas = $("#lineChart")[0].getContext("2d")
-        chart = new Chart(chartCanvas).Line(spendingData)
+        renderSpendingChart({});
 
-    spendingData = {
-      labels : dates,
-      datasets : [
-        {
-          fillColor : "rgba(220,220,220,0.5)",
-          strokeColor : "red",
-          data : balances
-        }
-      ]
-    }
+    renderSpendingChart = (options) ->
+        nv.addGraph createSpendingChart();
+    
+    createSpendingChart = ->
+        chart = nv
+                .models
+                .lineChart()                
+                .x((dataPoint) ->
+                    dataPoint[0] 
+                )
+                .y((dataPoint) ->
+                    dataPoint[1]
+                )
 
-    getSpending = ->
+        chart.yAxis
+               .axisLabel('Spend')
+               .tickFormat( (value) ->
+                    return value
+                )
+
+        chart.xAxis
+               .axisLabel('Date')
+               .rotateLabels(-45)
+               .tickFormat( (date) ->
+                    d3.time.format('%b %d')(new Date(date))
+                )
+
+        d3.select(".spending svg").datum(getYearSpending()).call(chart)
+
+        nv.utils.windowResize(chart.update)
+
+        chart.dispatch.on(
+            "stateChange", 
+            (e) ->
+                nv.log("New Chart State:", JSON.stringify(e))
+        )
+        chart
+
+    getYearSpending = ->
         toDate = new Date()
         fromDate = new Date().setMonth(toDate.getMonth()-12)
+
+        yearSpending.length = 0;
+        dailyValueStore = {};
 
         transactions = Transactions.find(
             {
@@ -30,10 +75,22 @@ Meteor.startup ->
                     $lt: toDate
                 }
             },
-            limit: 100
         ).forEach( 
             (transaction) ->
-                dates.push transaction.account_name
-                balances.push transaction.balance
+                if dailyValueStore.hasOwnProperty(transaction.date)
+                    dailyValueStore[transaction.date] += transaction.value
+                else                 
+                    dailyValueStore[transaction.date] = transaction.balance
         )
+
+        for key of dailyValueStore
+          yearSpending.push [
+            new Date(key),
+            dailyValueStore[key] if dailyValueStore.hasOwnProperty(key)
+          ]
+        
+        return [
+            key: "Year Spend",
+            values: yearSpending
+        ]
 

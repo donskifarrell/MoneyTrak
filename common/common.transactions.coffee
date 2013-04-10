@@ -16,7 +16,7 @@
 #   account_name: name of account
 #   account_number: account number
 #
-Transactions = new Meteor.Collection("transactions")
+@Transactions = new Meteor.Collection("transactions")
 Transactions.allow
   insert: (userId, transaction) ->
     true # no inserts -- use addTransaction method

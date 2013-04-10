@@ -1,6 +1,11 @@
 template(name='graph_view')
     h2 Financial Overview
     hr
-
-    canvas#lineChart.linehcart(width="900",height="900")
+    .row-fluid
+        .span2.options
+            button.btn.refresh Refresh
+    .row-fluid
+        .span12
+            .spending
+                svg.in-out-chart
 

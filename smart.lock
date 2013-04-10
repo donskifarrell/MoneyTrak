@@ -2,7 +2,7 @@
   "meteor": {
     "git": "https://github.com/meteor/meteor.git",
     "branch": "master",
-    "commit": "f07715dc70de16a7aab84e56ab0c6cbd9c1f9dc6"
+    "commit": "cab491f3650fffc85661bca6b3cecf583410e05d"
   },
   "dependencies": {
     "basePackages": {
@@ -20,13 +20,13 @@
       },
       "chartjs": {
         "git": "https://github.com/donskifarrell/meteor-chartjs.git",
-        "tag": "v0.0.1",
-        "commit": "105f1ff6a4291030a88f23ba1e1ae1786235e444"
+        "tag": "v0.0.3",
+        "commit": "cd3339ccbc99eb8fe7664a918aef25423bdaca3b"
       },
       "filepicker": {
         "git": "https://github.com/Filepicker/meteor.git",
-        "tag": "v0.2.0",
-        "commit": "1ae688ad1abfbe6777c465e11a0d5287ad9e4d4a"
+        "tag": "v0.3.0",
+        "commit": "dcb6f3779e5fc105520ba06b0392e3a79c73a7e6"
       },
       "jquery-csv": {
         "git": "https://github.com/donskifarrell/meteor-jquery-csv.git",

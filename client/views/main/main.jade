@@ -1,15 +1,15 @@
 template(name='main_content')
   {{#if currentUser}}
-    {{#if sessionEquals 'navMenuSelection' 'import-data'}}
+    {{#if isPageSelected 'import-data'}}
         {{> import_data}}
     {{/if}}
-    {{#if sessionEquals 'navMenuSelection' 'transactions-view'}}
+    {{#if isPageSelected 'transactions-view'}}
         {{> transactions_view}}
     {{/if}}
-    {{#if sessionEquals 'navMenuSelection' 'graph-view'}}
+    {{#if isPageSelected 'graph-view'}}
         {{> graph_view}}
     {{/if}}
-    {{#if sessionEquals 'navMenuSelection' 'location_view'}}
+    {{#if isPageSelected 'location_view'}}
         {{> location_view}}
     {{/if}}
   {{else}}
