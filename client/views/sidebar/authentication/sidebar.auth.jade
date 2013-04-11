@@ -1,18 +1,5 @@
-template(name='login_state')
-  .side-auth
-    {{#if currentUser}}
-      {{> logged_in}}
-    {{else}}
-      legend Welcome!
-      {{> logged_out}}
-    {{/if}}
 
-template(name='logged_in')
-  {{#if currentUser}}
-    {{> navigation_menu}}
-  {{/if}}
-
-template(name='logged_out')
+template(name='login_menu')
   {{> user_account_form}}
   p.or 
     span Or

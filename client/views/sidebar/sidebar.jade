@@ -1,6 +1,5 @@
-template(name='sidebar_content')
-  {{> login_state}}
 
+//- Header of sidebar
 template(name='sidebar_user_details')
   {{#if currentUser}}
     {{#if loggingIn}}
@@ -13,6 +12,33 @@ template(name='sidebar_user_details')
     {{/if}}
   {{/if}}
 
+//- Main section of sidebar
+template(name='sidebar_content')
+  .side-auth
+    {{#if currentUser}}
+      {{> logged_in}}
+    {{else}}
+      legend Welcome!
+      {{> logged_out}}
+    {{/if}}
+
+template(name='logged_in')
+  {{#if currentUser}}
+    {{> navigation_menu}}
+  {{/if}}
+
+template(name='logged_out')
+  {{> user_account_form}}
+  p.or 
+    span Or
+  button.btn.google Login with Google | 
+    i.icon-user
+  p.or
+    span Or
+  button.btn.twitter Login with Twitter | 
+    i.icon-user
+
+//- Footer of sidebar
 template(name='sidebar_footer')
   hr
   .row
