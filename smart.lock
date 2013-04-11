@@ -14,9 +14,8 @@
     },
     "packages": {
       "jade-handlebars": {
-        "git": "https://github.com/SimonDegraeve/meteor-jade-handlebars.git",
-        "tag": "v0.2.7",
-        "commit": "82f6f9ac43a68ffabe1d9b9620be2a4ca6790b56"
+        "git": "https://github.com/tomconnors/meteor-jade-handlebars.git",
+        "commit": "6fd94f31606a6fd78b17a88da0b0c71e251774bd"
       },
       "chartjs": {
         "git": "https://github.com/donskifarrell/meteor-chartjs.git",
