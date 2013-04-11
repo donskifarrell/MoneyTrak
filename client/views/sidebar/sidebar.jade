@@ -14,13 +14,13 @@ template(name='sidebar_user_details')
 
 //- Main section of sidebar
 template(name='sidebar_content')
-  .side-auth
-    {{#if currentUser}}
-      {{> logged_in}}
-    {{else}}
+  {{#if currentUser}}
+    {{> logged_in}}
+  {{else}}
+    .side-auth
       legend Welcome!
       {{> logged_out}}
-    {{/if}}
+  {{/if}}
 
 template(name='logged_in')
   {{#if currentUser}}

@@ -2,12 +2,15 @@ Meteor.startup ->
 
     Template.navigation_menu.events 
         "click .nav-import": (e, tmpl) ->
+            setHeaderAsActive(e)
             Session.set("navMenuSelection", "import-data")
 
         "click .nav-transactions": (e, tmpl) ->
+            setHeaderAsActive(e)
             Session.set("navMenuSelection", "transactions-view")
 
         "click .nav-graph": (e, tmpl) ->
+            setHeaderAsActive(e)
             Session.set("navMenuSelection", "graph-view")
         
         "click .loadCsv": (e, tmpl) ->
@@ -51,3 +54,11 @@ Meteor.startup ->
         # or a ' at the start. Then convert to a number if valid.
         trimmedValue = value.replace(/^[\s+'?]|\s+$/g, "");
         return $.csv.hooks.castToScalar trimmedValue, ""
+
+    setHeaderAsActive = (element)->
+        clearAllHeaders()
+        $(element.currentTarget).parent().addClass("active")
+
+
+    clearAllHeaders = ->
+        $(".nav-gradient").removeClass("active");
