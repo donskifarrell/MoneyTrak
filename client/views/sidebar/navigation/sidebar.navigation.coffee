@@ -32,6 +32,9 @@ Meteor.startup ->
                     console.log(FPError.toString())
             );
 
+    Template.navigation_menu.numTransactions = ->
+        Transactions.find({owner: Meteor.userId()}).count()
+
     parseCsvFile = (csvData) ->
         data = $.csv.toObjects(
             csvData,

@@ -28,8 +28,13 @@ template(name='navigation_menu')
                 | Transactions View
             #transactions-view.accordion-body.collapse
               .accordion-inner
-                | Transactions summary
-                | 1 millions transactions!
+                p.lead Transaction Summary
+                p 
+                    b Total: 
+                    | {{ numTransactions }}
+                p 
+                    b Untagged: 
+                    | {{ numTransactions }}
         .accordion-group.nav-group
             .accordion-heading.nav-gradient
               a.accordion-toggle.nav-graph(
@@ -39,4 +44,5 @@ template(name='navigation_menu')
                 | Graph View
             #graph-view.accordion-body.collapse
               .accordion-inner
-                | Graphs list
+                p.lead Select a graph
+                
