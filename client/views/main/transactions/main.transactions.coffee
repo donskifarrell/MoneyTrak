@@ -4,5 +4,7 @@ Meteor.startup ->
         Transactions.find(
             {owner: Meteor.userId()},
             limit: 100
-        );
+        )
 
+    Template.transactions_view.formatDate = (date) ->
+        date.toDateString()
