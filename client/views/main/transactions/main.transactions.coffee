@@ -1,8 +1,5 @@
 Meteor.startup ->
 
-    Template.transactions_view.formatDate = (date) ->
-        date.toDateString()
-
     Template.transactions_view.rendered = ->
         $('#tranGrid').datagrid({ 
             dataSource: new TransactionDataSource()
@@ -77,6 +74,7 @@ Meteor.startup ->
               data.reverse()  if options.sortDirection is "desc"
 
             # PAGING
+            options.pageSize = 25;
             startIndex = options.pageIndex * options.pageSize
             endIndex = startIndex + options.pageSize
             end = (if (endIndex > count) then count else endIndex)
