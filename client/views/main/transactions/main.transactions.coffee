@@ -19,7 +19,7 @@ Meteor.startup ->
                 else
                     item.description_tagging =
                         Template.transaction_description
-                                desc: item.description
+                                desc: " " + item.description
 
         columns: ->
             [
