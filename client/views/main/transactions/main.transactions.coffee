@@ -33,12 +33,12 @@ Meteor.startup ->
                 },                
                 {
                     property: 'value',
-                    label: 'Transaction Amount',
+                    label: 'Transaction Amount (£)',
                     sortable: true
                 },                
                 {
                     property: 'balance',
-                    label: 'Balance',
+                    label: 'Balance (£)',
                     sortable: true
                 },
             ]
@@ -61,8 +61,12 @@ Meteor.startup ->
             if options.search
               data = _.filter(data, (item) ->
                 for prop of item
-                  continue  unless item.hasOwnProperty(prop)
-                  return true  if ~item[prop].toString().toLowerCase().indexOf(options.search.toLowerCase())
+                  continue unless item.hasOwnProperty(prop)
+                  continue unless item[prop] != undefined
+                  continue unless item[prop] != null
+                  return true if ~item[prop].toString()
+                                            .toLowerCase()
+                                            .indexOf(options.search.toLowerCase())
                 false
               )
 
