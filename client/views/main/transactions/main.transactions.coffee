@@ -5,14 +5,21 @@ Meteor.startup ->
             dataSource: new TransactionDataSource()
         }).on('loaded', ->            
             highlightValues()
+            highlightUntagged()
         )
         highlightValues()
+        highlightUntagged()
 
     TransactionDataSource = ->
         _data: []
         _formatter: (items) ->
             $.each items, (index, item) ->
-                return
+                if (item.tags != null)
+                    item.description_tagging = item.description
+                else
+                    item.description_tagging =
+                        Template.transaction_description
+                                desc: item.description
 
         columns: ->
             [
@@ -27,10 +34,10 @@ Meteor.startup ->
                     sortable: true
                 },                
                 {
-                    property: 'description',
+                    property: 'description_tagging',
                     label: 'Description',
                     sortable: true
-                },                
+                },             
                 {
                     property: 'value',
                     label: 'Transaction Amount (£)',
@@ -48,8 +55,7 @@ Meteor.startup ->
                 cursor = Transactions.find(
                     {
                         owner: Meteor.userId()
-                    },
-                    limit: 100
+                    }
                 )
                 this._data = cursor.map (item) ->
                     item.date = item.date.toDateString()
@@ -75,7 +81,7 @@ Meteor.startup ->
             # SORTING
             if options.sortProperty
               data = _.sortBy(data, options.sortProperty)
-              data.reverse()  if options.sortDirection is "desc"
+              data.reverse() if options.sortDirection is "desc"
 
             # PAGING
             options.pageSize = 25;
@@ -87,7 +93,7 @@ Meteor.startup ->
             start = startIndex + 1
             data = data.slice(startIndex, endIndex)
 
-            # this._formatter data  if this._formatter
+            this._formatter data if this._formatter
 
             callback
               data: data
@@ -103,3 +109,7 @@ Meteor.startup ->
           return if isNaN cellvalue
           return $(this).addClass "neg" if cellvalue.substring(0, 1) is "-"
           return $(this).addClass "pos"
+
+    highlightUntagged = ->
+        $(".untagged").each ->
+          return $(this).parent().parent().addClass "error"
