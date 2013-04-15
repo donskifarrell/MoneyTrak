@@ -2,13 +2,23 @@ Meteor.startup ->
 
     Template.transactions_view.rendered = ->
         $('#tranGrid').datagrid({ 
-            dataSource: new TransactionDataSource()
+            dataSource: new TransactionDataSource(),
+            rowTemplate: (data, columns, rowHtml) ->
+                $.each data, (index, row) ->
+                    rowHtml += '<tr data-collapse>'
+                    $.each columns, (index, column) ->
+                        rowHtml += '<td>' + row[column.property] + '</td>'
+                    rowHtml += '<div>A section here!</div>'
+                    rowHtml += '</tr>'
+                return rowHtml
         }).on('loaded', ->            
             highlightValues()
             highlightUntagged()
+            enableExpander()
         )
         highlightValues()
         highlightUntagged()
+        enableExpander()
 
     TransactionDataSource = ->
         _data: []
@@ -30,7 +40,7 @@ Meteor.startup ->
                 },                
                 {
                     property: 'transaction_type',
-                    label: 'Transaction Type',
+                    label: 'Type',
                     sortable: true
                 },                
                 {
@@ -40,7 +50,7 @@ Meteor.startup ->
                 },             
                 {
                     property: 'value',
-                    label: 'Transaction Amount (£)',
+                    label: 'Amount (£)',
                     sortable: true
                 },                
                 {
@@ -103,6 +113,14 @@ Meteor.startup ->
               pages: pages
               page: page
 
+    DataRowTemplate = (data, columns, rowHtml) ->
+        $.each data, (index, row) ->
+            rowHtml += '<tr>'
+            $.each columns, (index, column) ->
+                rowHtml += '<td>' + row[column.property] + '</td>'
+            rowHtml += '</tr>'
+
+
     highlightValues = ->
         $("td").each ->            
           cellvalue = $(this).html()
@@ -112,4 +130,12 @@ Meteor.startup ->
 
     highlightUntagged = ->
         $(".untagged").each ->
-          return $(this).parent().parent().addClass "error"
+          $(this).parent().parent().addClass "error"
+          $(this).parent().parent().parent().data("data-collapse", "accordion")
+
+    enableExpander = ->
+        ###new jQueryCollapse(
+            $(".tranGrid"), 
+            {
+                query: 'tbody tr'
+            })###
