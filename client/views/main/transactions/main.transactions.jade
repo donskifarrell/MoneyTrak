@@ -4,77 +4,76 @@ template(name='transactions_view')
         h2 Transactions
         hr
         .transactions-view
-            table.table.table-striped.table-bordered.table-hover.table-condensed#tranGrid
-                thead
-                    tr
-                        th
-                            .row-fuid
-                                .span6
-                                    .datagrid-header-left
-                                      .grid-controls
-                                        span
-                                          span.grid-start
-                                          | -
-                                          span.grid-end
-                                          | of
-                                          span.grid-count
-                                        .select.grid-pagesize(data-resize='auto')
-                                          button.btn.dropdown-toggle(data-toggle='dropdown')
-                                            span.dropdown-label
-                                            span.caret
-                                          ul.dropdown-menu
-                                            li(data-value='5', data-selected='true')
-                                              a(href='#') 5
-                                            li(data-value='10')
-                                              a(href='#') 10
-                                            li(data-value='20')
-                                              a(href='#') 20
-                                            li(data-value='50')
-                                              a(href='#') 50
-                                            li(data-value='100')
-                                              a(href='#') 100
-                                        span Per Page
-                                    .datagrid-header-right
-                                      .grid-pager
-                                        button.btn.grid-prevpage(type='button')
-                                          i.icon-chevron-left
-                                        span Page
-                                        .input-append.dropdown.combobox
-                                          input.span1(type='text')
-                                          button.btn(data-toggle='dropdown')
-                                            i.caret
-                                          ul.dropdown-menu
-                                        span
-                                          | of
-                                          span.grid-pages
-                                        button.btn.grid-nextpage(type='button')
-                                          i.icon-chevron-right
-                                .span6
-                                    span.datagrid-header-title Geographic Data Sample
-                                    .datagrid-header-left
-                                      .input-append.search.datagrid-search
-                                        input.input-medium(type='text', placeholder='Search')
-                                        button.btn
-                                          i.icon-search
-                                    .datagrid-header-right
-                                      .select.filter(data-resize='auto')
-                                        button.btn.dropdown-toggle(data-toggle='dropdown')
-                                          span.dropdown-label
-                                          span.caret
-                                        ul.dropdown-menu
-                                          li(data-value='all', data-selected='true')
-                                            a(href='#') All
-                                          li(data-value='lt5m')
-                                            a(href='#')
-                                              | Population
-                                              5m
-                                          li(data-value='gte5m')
-                                            a(href='#')
-                                              | Population
-                                              | = 5M
-                tfoot
-                    tr
-                        th                            
+          table.table.table-striped.table-bordered.table-hover.table-condensed#tranGrid
+            thead
+              tr
+                th
+                  .row-fuid
+                    .span6
+                      .datagrid-header-left
+                        .grid-controls
+                          span
+                            span.grid-start
+                            | - 
+                            span.grid-end
+                            | of 
+                            span.grid-count
+                          .select.grid-pagesize(data-resize='auto')
+                            button.btn.dropdown-toggle(data-toggle='dropdown')
+                              span.dropdown-label
+                              span.caret
+                            ul.dropdown-menu
+                              li(data-value='5', data-selected='true')
+                                a(href='#') 5 
+                              li(data-value='10')
+                                a(href='#') 10 
+                              li(data-value='20')
+                                a(href='#') 20 
+                              li(data-value='50')
+                                a(href='#') 50 
+                              li(data-value='100')
+                                a(href='#') 100 
+                          span Per Page
+                      .datagrid-header-right
+                        .grid-pager
+                          button.btn.grid-prevpage(type='button')
+                            i.icon-chevron-left
+                          span Page 
+                          .input-append.dropdown.combobox
+                            input.span1(type='text')
+                            button.btn(data-toggle='dropdown')
+                              i.caret
+                            ul.dropdown-menu
+                          span
+                            | of 
+                            span.grid-pages
+                          button.btn.grid-nextpage(type='button')
+                            i.icon-chevron-right
+                    .span6                      
+                      .datagrid-header-left
+                        .select.filter(data-resize='auto') Filter on: 
+                          button.btn.dropdown-toggle(data-toggle='dropdown')
+                            span.dropdown-label
+                            span.caret
+                          ul.dropdown-menu
+                            li(data-value='all', data-selected='true')
+                              a(href='#') All
+                            li(data-value='tagged')
+                              a(href='#')
+                                | Tagged
+                                5m
+                            li(data-value='untagged')
+                              a(href='#')
+                                | Untagged
+                      span.datagrid-header-title Transaction Search: 
+                      .datagrid-header-right
+                        .input-append.search.datagrid-search
+                          input.input-medium(type='text', placeholder='Search')
+                          button.btn
+                            i.icon-search
+            tfoot
+              tr
+                th                            
     .span1
 
 template(name='transaction_description')
