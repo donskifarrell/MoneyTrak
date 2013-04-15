@@ -1,7 +1,6 @@
 {
   "packages": {
     "jade-handlebars": {},
-    "chartjs": {},
     "filepicker": {},
     "jquery-csv": {},
     "handlebar-helpers": {}

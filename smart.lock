@@ -2,12 +2,11 @@
   "meteor": {
     "git": "https://github.com/meteor/meteor.git",
     "branch": "master",
-    "commit": "cab491f3650fffc85661bca6b3cecf583410e05d"
+    "commit": "0ffea1c4c308ed24906984f99b13b8fca5a0956c"
   },
   "dependencies": {
     "basePackages": {
       "jade-handlebars": {},
-      "chartjs": {},
       "filepicker": {},
       "jquery-csv": {},
       "handlebar-helpers": {}
@@ -16,11 +15,6 @@
       "jade-handlebars": {
         "git": "https://github.com/tomconnors/meteor-jade-handlebars.git",
         "commit": "6fd94f31606a6fd78b17a88da0b0c71e251774bd"
-      },
-      "chartjs": {
-        "git": "https://github.com/donskifarrell/meteor-chartjs.git",
-        "tag": "v0.0.3",
-        "commit": "cd3339ccbc99eb8fe7664a918aef25423bdaca3b"
       },
       "filepicker": {
         "git": "https://github.com/Filepicker/meteor.git",
