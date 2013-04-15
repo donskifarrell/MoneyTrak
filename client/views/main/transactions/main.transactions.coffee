@@ -5,20 +5,22 @@ Meteor.startup ->
             dataSource: new TransactionDataSource(),
             rowTemplate: (data, columns, rowHtml) ->
                 $.each data, (index, row) ->
-                    rowHtml += '<tr data-collapse>'
+                    rowHtml += '<tr class="master" data-master="' + index + '">'
                     $.each columns, (index, column) ->
                         rowHtml += '<td>' + row[column.property] + '</td>'
-                    rowHtml += '<div>A section here!</div>'
-                    rowHtml += '</tr>'
+                    rowHtml += '</tr>'                    
+                    rowHtml += '<tr id="detail' + index + '" class="hide-detail">
+                        <td colspan="5"><div>' + row.description_tagging + '</div></td>
+                        </tr>'
                 return rowHtml
         }).on('loaded', ->            
             highlightValues()
             highlightUntagged()
-            enableExpander()
+            setupMasterDetail()
         )
         highlightValues()
         highlightUntagged()
-        enableExpander()
+        setupMasterDetail()
 
     TransactionDataSource = ->
         _data: []
@@ -133,9 +135,14 @@ Meteor.startup ->
           $(this).parent().parent().addClass "error"
           $(this).parent().parent().parent().data("data-collapse", "accordion")
 
-    enableExpander = ->
-        ###new jQueryCollapse(
-            $(".tranGrid"), 
-            {
-                query: 'tbody tr'
-            })###
+    showDetails = (id) ->
+        $(".show-detail").each ->
+          $(this).removeClass("show-detail")
+          $(this).addClass("hide-detail")
+        $(id).removeClass("hide-detail").addClass("show-detail")
+
+    setupMasterDetail = ->
+        $(".master").on "click", ->
+            num = $(this).data("master")
+            showDetails("#detail" + num)
+

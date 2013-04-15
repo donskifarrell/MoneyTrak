@@ -10,9 +10,12 @@
 
     thead > tr:first-child + tr > th {
         min-width: 145px;
+        cursor: pointer;
     }
 
-    tbody > tr {
+    tbody > .master {
+        cursor: pointer;
+
         td {
             text-align: center !important;
         }
@@ -23,10 +26,25 @@
     }
 }
 
+// TODO: Move to colours file;
 .neg { 
     color: red;
 }
 
 .pos { 
     color: green;
+}
+
+.hide-detail {
+    visibility: collapse;
+    display: none;
+}
+
+.show-detail {
+    visibility: visible;
+
+    td {
+        border: none !important;
+        border-left: 5px solid green !important;
+    }
 }
