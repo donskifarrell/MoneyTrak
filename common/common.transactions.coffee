@@ -1,4 +1,4 @@
-# LifeChart -- data model
+# MoneyTrak -- data model
 # Loaded on both the client and the server
 
 #/////////////////////////////////////////////////////////////////////////////
