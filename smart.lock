@@ -2,7 +2,7 @@
   "meteor": {
     "git": "https://github.com/meteor/meteor.git",
     "branch": "master",
-    "commit": "0ffea1c4c308ed24906984f99b13b8fca5a0956c"
+    "commit": "5d736d4bf0448c7db1f9b47124dfafc34a9631bb"
   },
   "dependencies": {
     "basePackages": {
@@ -13,8 +13,9 @@
     },
     "packages": {
       "jade-handlebars": {
-        "git": "https://github.com/tomconnors/meteor-jade-handlebars.git",
-        "commit": "6fd94f31606a6fd78b17a88da0b0c71e251774bd"
+        "git": "https://github.com/SimonDegraeve/meteor-jade-handlebars.git",
+        "tag": "v0.2.7",
+        "commit": "82f6f9ac43a68ffabe1d9b9620be2a4ca6790b56"
       },
       "filepicker": {
         "git": "https://github.com/Filepicker/meteor.git",
@@ -28,8 +29,8 @@
       },
       "handlebar-helpers": {
         "git": "https://github.com/raix/Meteor-handlebar-helpers.git",
-        "tag": "v0.0.5",
-        "commit": "bedecf71d04097773b359ccbf6e5bd97fcb53f8e"
+        "tag": "v0.0.6",
+        "commit": "8ca9ab1edcbb7d1ef935d4ad8c7e32479ea70b24"
       }
     }
   }

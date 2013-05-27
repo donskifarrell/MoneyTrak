@@ -1,0 +1,15 @@
+template(name='import_data')
+    h2 Import Data
+    hr
+    .row-fluid
+        .span8.options
+            p Please enter your Natwest Online Banking login details:
+            form
+                fieldset
+                    label Customer Number:
+                    input#cust-number(type="text", placeholder="Enter your Natwest customer number", value="xxx")
+                    label 4-Digit Pin:
+                    input#cust-pin(type="password", placeholder="Enter your 4-digit Natwest pin number", value="xxxx")
+                    label Password:
+                    input#cust-pass(type="password", placeholder="Enter your Natwest online banking password", value="xxxx")
+                    button.btn.import(type="submit") Import!
