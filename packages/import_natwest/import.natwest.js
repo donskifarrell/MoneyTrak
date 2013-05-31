@@ -1,6 +1,10 @@
 var $ = Npm.require('jquery');
+var Future = Npm.require('fibers/future');
+var Moment = Npm.require('moment');
 
 Natwest = {
+    nwolbUrl: 'https://www.nwolb.com/',
+
     loginDetails: {
         custNumber: undefined,
         pin: undefined,
@@ -11,219 +15,205 @@ Natwest = {
         if (this.loginDetails.custNumber && 
             this.loginDetails.pin && 
             this.loginDetails.pass) {
-                this.site().get(Natwest.nwolb.login);
+                var Request = Npm.require('request').defaults({
+                    headers: {
+                        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/5XX.XX (KHTML, like Gecko) Chrome'
+                    },
+                    followAllRedirects: true
+                });
+                
+                var requestStore = this.loginNatwest(Request);
+                return this.getNatwestTransactions(requestStore);
         } else {
             console.log("No Login Details entered for Natwest login")
             return false;
         }
     },
 
-    site: function() {
-        var nwolbUrl = 'https://www.nwolb.com';
+    loginNatwest: function(Request) {
+        /* login Page: */        
+        var login_future = new Future();
+        console.log("Requesting URL: " + this.nwolbUrl);
+        Request.get(
+                this.nwolbUrl, 
+                function(error, r, page){
+                    if (error || r.statusCode != 200) {
+                        console.log("Unable to get Natwest login page: " + error);
+                        return;
+                    }
+                    //console.log("!!!!!!!!!!!! Login Page " + page);
+                    login_future.ret(page);
+                });
+        login_future.wait();
 
-        var request = Npm.require('request').defaults({
-            headers: {
-                'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/5XX.XX (KHTML, like Gecko) Chrome'
-            },
-            followAllRedirects: true
-        });
+        /* Customer Details login Page: */
+        var login_ref_url = $('frame', login_future.value).first().attr('src')
+        var cust_detail_future = new Future();
+        console.log("Requesting URL: " + this.nwolbUrl + login_ref_url);
+        Request.get(
+                this.nwolbUrl + login_ref_url, 
+                function(error, r, page){
+                    if (error || r.statusCode != 200) {
+                        console.log("Unable to get customer details login page: " + error);
+                        return;
+                    }
+                    //console.log("!!!!!!!!!!!! Cust Login Page " + page);
+                    cust_detail_future.ret(page);
+                });
+        cust_detail_future.wait();
 
-        var parse = function(arguments) {
-            var arguments = Array.prototype.slice.call(arguments);
+        /* customer pin and password details login Page: */
+        var cust_details_form = $('form:first', cust_detail_future.value)
+                                    .find('input:text')
+                                    .val(Natwest.loginDetails.custNumber)
+                                    .end();
+        var cust_pin_pass_future = new Future();
+        console.log("Requesting URL: " + this.nwolbUrl + cust_details_form.attr('action'));
+        Request.post(
+                {                     
+                    uri: this.nwolbUrl + cust_details_form.attr('action'),
+                    form: cust_details_form.serializeJSON()
+                }, 
+                function(error, r, page){
+                    if (error || r.statusCode != 200) {
+                        console.log("Unable to get customer pin and password details login page: " + error);
+                        return;
+                    }
+                    //console.log("!!!!!!!!!!!! CustPin Pass apge: " + page);
+                    cust_pin_pass_future.ret(page);
+                });
+        cust_pin_pass_future.wait();
 
-            if (typeof(arguments[0]) !== 'object') {
-                arguments.unshift({});
-            }
+        /* account summary logged in page Page: */
+        var cust_pin_and_pass_form = $('form:first', cust_pin_pass_future.value);
+        cust_pin_and_pass_form.each(function() {
+            var a2f = 'ABCDEF'.split('');
 
-            if (arguments[0].uri === undefined) {
-                arguments[0].uri = nwolbUrl;
-            } else {
-                if (arguments[0].uri.indexOf(nwolbUrl) === -1) {
-                    arguments[0].uri = nwolbUrl + '/' + arguments[0].uri
+            for (var i = 0; i < a2f.length; i++) {
+                var input = $('input[name="ctl00$mainContent$Tab1$LI6PPE' + a2f[i] + '_edit"]', cust_pin_and_pass_form);
+                var label = $('label[for="' + input.attr('id') + '"]', cust_pin_and_pass_form);
+
+                var digit = label.text().replace(/[^\d]/g, '') - 1;
+
+                if (i < a2f.length / 2) {
+                    input.val(Natwest.loginDetails.pin[digit]);
+                } else {
+                    input.val(Natwest.loginDetails.pass[digit]);
                 }
             }
+        });
+        var account_summary_future = new Future();
+        console.log("Requesting URL: " + this.nwolbUrl + cust_pin_and_pass_form.attr('action'));
+        Request.post(
+                {
+                    uri: this.nwolbUrl + cust_pin_and_pass_form.attr('action'), 
+                    form: cust_pin_and_pass_form.serializeJSON()
+                },                
+                function(error, r, page){
+                    if (error || r.statusCode != 200) {
+                        console.log("Unable to get account summary logged in page: " + error);
+                        return;
+                    }
+                    //console.log("!!!!!!!!!!!! Account Summary Page: " + page);
+                    account_summary_future.ret(page);
+                });
+        account_summary_future.wait();
 
-            return arguments;
-        }
+        console.log("Natwest Login All Done");
 
-        return {
-            get: function() {
-                //console.log("Natwest Get - " + arguments[0].uri)
-                return request.get.apply(this, parse(arguments));
-            },
-            post: function() {
-                //console.log("Natwest Post - " + arguments[0].uri)
-                return request.post.apply(this, parse(arguments));
-            }
-        }
+        return Request;
     },
 
-    nwolb: {
-        login: function (error, r, login) {
-            console.log("Getting Natwest Login Requirements")
-            if (!error && r.statusCode == 200) {
-                Natwest.site().get(
-                    {
-                      uri: $('frame', login).first().attr('src'),
-                    },
-                    Natwest.nwolb.enter_customer_details
-                );
-            }
-        },
+    getNatwestTransactions: function(Request) {
+        var urls = this.generateSpecificDateUrls();
+        //var urls = ['StatementsDownloadSpecificDates.aspx?NavFrom=SpecificDates&StartDate=01%2f01%2f13&EndDate=31%2f05%2f13&DownLoadTo=1&Acounts=-1'];
+        var nwolbUrl = this.nwolbUrl;
 
-        enter_customer_details: function (error, r, enter_customer_number) {
-            console.log("Entering Customer Details")
-            console.log(Natwest.loginDetails)
-            if (!error && r.statusCode == 200) {
-                var form = $('form:first', enter_customer_number);
-
-                Natwest.site().post(
-                    {
-                        uri: form.attr('action'),
-                        form: form
-                            .find('input:text')
-                                .val(Natwest.loginDetails.custNumber)
-                                .end()
-                            .serializeJSON()
-                    },
-                    Natwest.nwolb.enter_pin_and_password
-                );
-            }
-        },
-
-        enter_pin_and_password: function (error, r, enter_pin_and_password) {
-            console.log("Entering Pin and Password Securely")
-            if (!error && r.statusCode == 200) {
-                var form = $('form:first', enter_pin_and_password);
-
-                form.each(function() {
-                    var a2f = 'ABCDEF'.split('');
-
-                    for (var i = 0; i < a2f.length; i++) {
-                        var input = $('input[name="ctl00$mainContent$Tab1$LI6PPE' + a2f[i] + '_edit"]', form);
-                        var label = $('label[for="' + input.attr('id') + '"]', form);
-
-                        var digit = label.text().replace(/[^\d]/g, '') - 1;
-
-                        if (i < a2f.length / 2) {
-                            input.val(Natwest.loginDetails.pin[digit]);
-                        } else {
-                            input.val(Natwest.loginDetails.pass[digit]);
-                        }
+        var transaction_data_dl_futures = _.map(urls, function(url) {
+            console.log("URL: " + nwolbUrl + url);
+            /* Specific Date selection Page: */
+            var specific_date_future = new Future();
+            Request.post(
+                {
+                    uri: nwolbUrl + url
+                },
+                function(error, r, page){
+                    if (error || r.statusCode != 200) {
+                        console.log("Unable to get Specific Date selection page: " + error);
+                        return;
                     }
+                    //console.log("!!!!!!!!!!!! specific_date Page: " + page);
+                    specific_date_future.ret(page);
+                });
+            specific_date_future.wait();
+
+            /* Download Csv Page: */
+            var download_csv_form = $('form:first', specific_date_future.value)
+            var download_csv_json_form = download_csv_form.serializeJSON();
+            var download_csv_future = new Future();
+
+            Request.post(
+                {
+                    uri: nwolbUrl + download_csv_form.attr('action'),
+                    form: download_csv_json_form
+                },
+                function(error, r, page){
+                    if (error || r.statusCode != 200) {
+                        console.log("Unable to get download csv page: " + error);
+                        return;
+                    }
+                    //console.log("!!!!!!!!!!!! download_csv_future Page: " + page);
+                    download_csv_future.ret(page);
+                });
+            download_csv_future.wait();
+
+            /* Attempt Download Csv Page: */
+            var click_download_csv_form = $('form:first', download_csv_future.value)
+            var click_download_csv_json_form = click_download_csv_form.serializeJSON();
+            click_download_csv_json_form['ctl00$mainContent$SS7-LWLA_button_button'] = 'Download transactions'
+            var click_download_csv_future = new Future();
+            Request.post(
+                {
+                    uri: nwolbUrl + click_download_csv_form.attr('action'),
+                    form: click_download_csv_json_form
+                },
+                function(error, r, csv_page){
+                    if (error || r.statusCode != 200) {
+                        console.log("Unable to download csv data: " + error);
+                        return;
+                    }
+                    //console.log("!!!!!!!!!!!! click_download_csv Page: " + csv_page);
+                    click_download_csv_future.ret(csv_page);
                 });
 
-                Natwest.site().post(
-                    {
-                        uri: form.attr('action'),
-                        form: form.serializeJSON()
-                    },
-                    Natwest.nwolb.logged_in
-                );
-            }
-        },
+            return click_download_csv_future;
+        });
 
-        logged_in: function (error, r, logged_in) {
-            if (!error && r.statusCode == 200) {
-                console.log("Logged in")
-                Natwest.nwolb.download_specific_dates_page();
-            }
-        },
+        Future.wait(transaction_data_dl_futures);
 
-        download_specific_dates_page: function () {
-            console.log("Navigating to Download Specific Statements Dates Page")
-            // "StatementsDownloadSpecificDates.aspx?NavFrom=SpecificDates&StartDate=22%2f03%2f2012&EndDate=21%2f04%2f2012&DownLoadTo=1&Acounts=1"
-            // Set series of dates logic here!
-            // End Date = todays date
-            // Start Date = some date in the past up to 1 year + 1 day from End Date
+        console.log("!!!!!!!!!!!! All futures done");
+        return _.invoke(transaction_data_dl_futures, 'get');
+    },
 
-            var todaysDate = new Date();
-            var endDay = todaysDate.getDate();
-            var endMonth = todaysDate.getMonth();
-            var endYear = todaysDate.getFullYear();
+    // End Date = todays date
+    // Start Date = some date in the past up to 1 year + 1 day from End Date
+    // Earliest Start Date is 01/01/2006
+    generateSpecificDateUrls: function() {
+        var urls = []
+        var endDate = Moment();
+        var startDate = endDate.clone().startOf('year');
 
-            var startDay = todaysDate.getDate() + 1;
-            var startMonth = todaysDate.getMonth();
-            var startYear = todaysDate.getFullYear() - 1;
+        while (startDate.isAfter('2005-12-31'))
+        {
+            urls.push("StatementsDownloadSpecificDates.aspx?NavFrom=SpecificDates&StartDate=" +
+                        startDate.format("DD%2fMM%2fYY") + "&EndDate=" + 
+                        endDate.format("DD%2fMM%2fYY") + "&DownLoadTo=1&Acounts=-1");
 
-            //for (var i = todaysDate.getFullYear(); i > todaysDate.getFullYear() - 1; i--)
-            //{
-                var startDate = startDay + "%2f" + startMonth + "%2f" + startYear;
-                var endDate = endDay + "%2f" + endMonth + "%2f" + endYear;
-
-                var urlWithDates = "StatementsDownloadSpecificDates.aspx?NavFrom=SpecificDates&StartDate=" +
-                            startDate + "&EndDate=" +
-                            endDate + "&DownLoadTo=1&Acounts=-1"
-                console.log(" - Getting range of transactions from: " + startDate + " to: " + endDate)
-                Natwest.site().post(
-                    {
-                        uri: urlWithDates
-                    },                
-                    Natwest.nwolb.download_csv_form_page
-                );
-
-                endYear = endYear -1;
-                startYear = startYear -1;
-
-                ///sadasdasd
-                var startDate = startDay + "%2f" + startMonth + "%2f" + startYear;
-                var endDate = endDay + "%2f" + endMonth + "%2f" + endYear;
-
-                var urlWithDates = "StatementsDownloadSpecificDates.aspx?NavFrom=SpecificDates&StartDate=" +
-                            startDate + "&EndDate=" +
-                            endDate + "&DownLoadTo=1&Acounts=-1"
-                console.log(" - Getting range of transactions from: " + startDate + " to: " + endDate)
-                Natwest.site().post(
-                    {
-                        uri: urlWithDates
-                    },                
-                    Natwest.nwolb.download_csv_form_page
-                );
-            //}
-        },
-
-
-        download_csv_form_page: function (error, r, download_csv_form) {
-            console.log("Navigating to Download CSV page")
-            if (!error && r.statusCode == 200) {
-                var form = $('form:first', download_csv_form);
-                var formJson = form.serializeJSON();
-                //formJson['SelectAllChecked_SS8CBIB'] = 'on'
-
-                Natwest.site().post(
-                    {
-                        uri: form.attr('action'),
-                        form: formJson
-                    },
-                    Natwest.nwolb.download_csv
-                );
-            }
-        },
-
-        download_csv: function (error, r, download_csv_page) {
-            console.log("Attempting to download CSV file")
-            if (!error && r.statusCode == 200) {
-                var form = $('form:first', download_csv_page);
-                var formJson = form.serializeJSON();
-                formJson['ctl00$mainContent$SS7-LWLA_button_button'] = 'Download transactions'
-
-                Natwest.site().post(
-                    {
-                        uri: form.attr('action'),
-                        form: formJson
-                    },
-                    Natwest.nwolb.completed_csv_download
-                );
-            }
-        },
-
-        completed_csv_download: function (error, r, completed_csv) {
-            console.log("*********************************************************************Finished downloading CSV details!")
-            //console.log(completed_csv);
-            if (!error && r.statusCode == 200) {
-                Meteor.bindEnvironment(parseCsvImport(completed_csv));
-            }
+            endDate = startDate.clone().subtract('days', 1);
+            startDate = endDate.clone().startOf('year');
         }
+
+        return urls;
     }
 }
 

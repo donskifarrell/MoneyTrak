@@ -89,6 +89,9 @@
         }
       }
     },
+    "moment": {
+      "version": "2.0.0"
+    },
     "jquery": {
       "version": "1.8.3",
       "dependencies": {

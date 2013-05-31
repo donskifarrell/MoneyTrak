@@ -3,7 +3,7 @@ Meteor.methods
         this.unblock();
         console.log encryptedLoginDetails
         Natwest.loginDetails = encryptedLoginDetails;
-        Natwest.getAllData();
+        parseCsvImport(csvData) for csvData in Natwest.getAllData();
 
 this.parseCsvImport = (csvData) ->
     data = $.csv.toObjects(
@@ -15,14 +15,12 @@ this.parseCsvImport = (csvData) ->
         }
     );
     console.log data
-    Fiber(->
-        Meteor.call(
+    Meteor.call(
             'addTransactions',
             {
                 transactions: data
             }
         );
-    ).run();
 
 this.parseCsvImportValue = (value) ->
     # Replace strings that have prevailing or trailing whitespace, 
