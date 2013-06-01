@@ -14,7 +14,6 @@ this.parseCsvImport = (csvData) ->
             onParseValue: this.parseCsvImportValue
         }
     );
-    console.log data
     Meteor.call(
             'addTransactions',
             {

@@ -17,10 +17,12 @@ Meteor.startup ->
             highlightValues()
             highlightUntagged()
             setupMasterDetail()
+            triggerFirstRowDetail()
         )
         highlightValues()
         highlightUntagged()
         setupMasterDetail()
+        triggerFirstRowDetail()
 
     TransactionDataSource = ->
         _data: []
@@ -67,12 +69,15 @@ Meteor.startup ->
                 cursor = Transactions.find(
                     {
                         owner: Meteor.userId()
+                    },
+                    {
+                        sort: { date: -1 }
                     }
-                )
+                );
                 this._data = cursor.map (item) ->
                     item.date = item.date.toDateString()
                     item
-
+                #_.sortBy(this._data, )
             data = $.extend(true, [], this._data);
 
             # SEARCHING
@@ -145,4 +150,7 @@ Meteor.startup ->
         $(".master").on "click", ->
             num = $(this).data("master")
             showDetails("#detail" + num)
+
+    triggerFirstRowDetail = ->
+        $(".master").first().trigger('click')
 
