@@ -34,20 +34,22 @@ template(name='transactions_view')
                               a(href='#') 100 
                         span Per Page
                       .span6
-                        button.btn.grid-prevpage(type='button')
-                          i.icon-chevron-left
-                        span Page 
-                        .input-append.dropdown.combobox
-                          input.span1(type='text')
-                          button.btn(data-toggle='dropdown')
-                            i.caret
-                          ul.dropdown-menu
-                        span
-                          | of 
-                          span.grid-pages
-                        button.btn.grid-nextpage(type='button')
-                          i.icon-chevron-right
+                        .grid-pager
+                          button.btn.grid-prevpage(type='button')
+                            i.icon-chevron-left
+                          span Page 
+                          .input-append.dropdown.combobox
+                            input.span1(type='text')
+                            button.btn(data-toggle='dropdown')
+                              i.caret
+                            ul.dropdown-menu
+                          span
+                            | of 
+                            span.grid-pages
+                          button.btn.grid-nextpage(type='button')
+                            i.icon-chevron-right
                     .span6
+                      .span6
                         .select.filter(data-resize='auto') Filter on: 
                           button.btn.dropdown-toggle(data-toggle='dropdown')
                             span.dropdown-label
@@ -62,12 +64,12 @@ template(name='transactions_view')
                             li(data-value='untagged')
                               a(href='#')
                                 | Untagged
-                      span.datagrid-header-title Transaction Search: 
-                      .datagrid-header-right
-                        .input-append.search.datagrid-search
-                          input.input-medium(type='text', placeholder='Search')
-                          button.btn
-                            i.icon-search
+                      .span6
+                        .datagrid-header-right
+                          .input-append.search.datagrid-search
+                            input.input-medium(type='text', placeholder='Search')
+                            button.btn
+                              i.icon-search
             tfoot
               tr
                 th                            
