@@ -14,13 +14,22 @@ template(name='sidebar_user_details')
 
 //- Main section of sidebar
 template(name='sidebar_content')
-  {{#if currentUser}}
-    {{> logged_in}}
-  {{else}}
-    .side-auth
-      legend Welcome!
-      {{> logged_out}}
-  {{/if}}
+  {{> account_box}}
+  #nav.pure-u
+    a.nav-menu-button(href='#nav') Menu
+    .nav-inner
+      .header
+        a(href='#') 
+          h2 MoneyTrak
+      {{#if currentUser}}
+        {{> logged_in}}
+      {{else}}
+        .account-btns
+          a.pure-button.pure-button-success.login-btn(href='#') Sign In
+          p.or
+            span Or
+          a.pure-button.pure-button-warning.register-btn(href='#') Register
+      {{/if}}
 
 template(name='logged_in')
   {{#if currentUser}}
@@ -29,7 +38,7 @@ template(name='logged_in')
 
 template(name='logged_out')
   {{> user_account_form}}
-  p.or 
+  p.or
     span Or
   button.btn.google Login with Google | 
     i.icon-user
@@ -55,3 +64,5 @@ template(name='sidebar_footer')
           | - 
           a Terms and Conditions
       .span3
+
+//- .pure-menu.pure-menu-open

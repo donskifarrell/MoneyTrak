@@ -1,5 +1,6 @@
 
 @import "style/colours.less";
+@import "style/base.less";
 
 /* Styling UI sections to take up fullscreen */
 html, body {
@@ -14,6 +15,26 @@ a {
     text-decoration:none;
     color: @href;
 }
+
+/* Styling buttons */
+.pure-button-success {
+    .pureButtonStyle(@btn-success-green); /* this is a green */
+}
+
+.pure-button-error {
+    .pureButtonStyle(@btn-success-error); /* this is a maroon */
+}
+
+.pure-button-warning {
+    .pureButtonStyle(@btn-success-warning);
+}
+
+.pure-button-secondary {
+    .pureButtonStyle(@btn-success-secondary); /* this is a light blue */
+}
+
+
+
 
 /*h1 {
     font: 400 2.4em 'Nixie One', Georgia, serif;

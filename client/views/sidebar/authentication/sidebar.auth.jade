@@ -1,14 +1,15 @@
 
+template(name='account_box')
+  .box.account-box
+    {{> login_menu}}
+
 template(name='login_menu')
-  {{> user_account_form}}
-  p.or 
-    span Or
-  button.btn.google Login with Google | 
-    i.icon-user
-  p.or
-    span Or
-  button.btn.twitter Login with Twitter | 
-    i.icon-user
+  .pure-g-r
+    button.google Sign In with Google
+  .pure-g-r
+    button.twitter Sign In with Twitter
+  .pure-g-r
+    {{> user_account_form}}
 
 template(name='user_account_form')
   {{#if inSignupFlow}}

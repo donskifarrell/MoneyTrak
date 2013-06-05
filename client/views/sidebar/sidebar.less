@@ -7,54 +7,90 @@
 }
 
 #nav {
-    position:fixed;
-    top:0;
-    bottom:0;
-    overflow:auto;
-    margin-left:-500px;
-    width:180px;
-    background:#252a3a;
-    text-align:center;
-    padding:2em 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+    margin-left: -500px;
+    width: 180px;
+    background: @sidebar-background;
+    text-align: center;
+    padding: 2em 0;
 
     .pure-menu {
-        background:transparent;
-        border:none;
-        text-align:left;
+        background: transparent;
+        border: none;
+        text-align: left;
 
         a:hover {
-            background:#373c5a;
+            background: @sidebar-href-background;
         }
 
         a {
-            color:#ffffff;
-            margin-left:0.5em;
+            color: @sidebar-href-colour;
+            margin-left: 0.5em;
         }
     }
 
     .pure-menu-heading {
-        border-bottom:none;
-        font-size:110%;
-        color:#4b7197;
+        border-bottom: none;
+        font-size: 110%;
+        color: @sidebar-menu-heading;
     }
 
     .nav-menu-button {
-        display:none;
+        display: none;
     }
 }
 
 .tran-count {
-    color:#4b7197;
+    color: @sidebar-menu-heading;
+}
+
+.account-btns {
+    .login-btn {
+        margin-top: 2.0em;
+    }    
+    p {
+        margin-top: 2.0em;
+    }
+    .register-btn {
+        margin-top: 1.0em;
+    } 
 }
 
 
+/* Styling 'Or' separators */
+.or {
+    font: 16px sans-serif;
+    margin-top: 30px;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+
+    @media only screen and (max-height : 790px) { 
+        margin-top: 5%;
+    } 
+}
+
+.or:before {
+    border-top: 2px solid #dfdfdf;
+    content:"";
+    margin: 0 auto;
+    position: absolute;
+    top: 10px; left: 0; right: 0; bottom: 0;
+    width: 30%;
+    z-index: -1;
+}
+
+.or span { 
+    background: @sidebar-background;
+    padding: 0 10px; 
+    color: white;
+}
 
 
-
-
-
-
-/* Styling Sidebar */
+/* OLD  Styling Sidebar */
 
 .sidebar {
     position: fixed !important;

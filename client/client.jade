@@ -4,34 +4,5 @@ head
 
 body
 	#layout.pure-g-r.content
-		#nav.pure-u
-			a.nav-menu-button(href='#nav') Menu
-			.nav-inner
-				.header
-					a(href='#') 
-						h2 MoneyTrak
-				.pure-menu.pure-menu-open
-					ul
-						li.pure-menu-heading Views
-						li
-							a(href='#') Account Summary
-						li
-							a(href='#')
-								| Transactions 
-								span.tran-count (2)
-						li
-							a(href='#') Hotspots
-						li
-							a(href='#') Bills
-						li
-							a(href='#') Trash
-						li.pure-menu-heading Admin
-						li
-							a(href='#') Import Data
-						li
-							a(href='#') Request a feature!
-						li
-							a(href='#') About
-
-
+		{{> sidebar_content}}
 

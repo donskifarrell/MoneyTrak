@@ -1,5 +1,45 @@
 
-/* Styling Sidebar Content */
+@import "../../../style/colours.less";
+@import "../../../style/base.less";
+
+
+/* Styling floating login/register box */
+
+.box {
+    border: 1px solid;     
+    box-shadow: 0px 2px 8px #231F20;
+    -webkit-box-shadow: 0px 2px 8px #231F20;
+    -mox-box-shadow: 0px 2px 8px #231F20;
+
+    &.account-box {
+        background-color: @sidebar-background;
+        width: 16em;
+        height: 20em;
+        border-radius: 10px;
+        margin-left: -19.4em;
+        margin-top: 6em;
+    }
+}
+
+/* Styling login buttons */
+
+button {
+    &.google {
+        .pureButtonStyle(@btn-login-google);
+    }
+
+    &.twitter {
+        .pureButtonStyle(@btn-login-twitter);
+    }
+}
+
+
+
+
+
+
+
+/* OLD Styling Sidebar Content */
 /* Maybe put in separate css file */
 
 .side-auth {
@@ -20,34 +60,6 @@
     }
 }
 
-/* Styling 'Or' separators */
-
-.or {
-    font: 16px sans-serif;
-    margin-top: 30px;
-    position: relative;
-    text-align: center;
-    z-index: 1;
-
-    @media only screen and (max-height : 790px) { 
-        margin-top: 5%;
-    } 
-}
-
-.or:before {
-    border-top: 2px solid #dfdfdf;
-    content:"";
-    margin: 0 auto;
-    position: absolute;
-    top: 10px; left: 0; right: 0; bottom: 0;
-    width: 30%;
-    z-index: -1;
-}
-
-.or span { 
-	background: #fff; 
-	padding: 0 10px; 
-}
 
 /* Styling Login Form */
 
