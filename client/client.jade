@@ -1,21 +1,36 @@
 head
 	title MoneyTrak
-	link(href='http://fonts.googleapis.com/css?family=Nixie+One', rel='stylesheet', type='text/css')
-	link(href='http://fonts.googleapis.com/css?family=Ledger', rel='stylesheet', type='text/css')
+	link(href='http://fonts.googleapis.com/css?family=Lato|Arimo', rel='stylesheet', type='text/css')
+
 body
-	.container-fluid
-		.row-fluid
-			.span3.lfill.sidebar
-				.wrap
-					header.side-header
-						h1
-							a(href='#') MoneyTrak
-						h4.subheader View and graph your money
-						{{> sidebar_user_details}}
-					hr
-					.side-content
-						{{> sidebar_content}}
-				footer.side-footer
-					{{> sidebar_footer}}
-			.span9.rfill
-				{{> main_content}}
+	#layout.pure-g-r.content
+		#nav.pure-u
+
+			a.nav-menu-button(href='#nav') Menu
+			.nav-inner
+				a.pure-button.primary-button(href='#') Compose
+				.pure-menu.pure-menu-open
+					ul
+						li.pure-menu-heading Views
+						li
+							a(href='#') Account Summary
+						li
+							a(href='#')
+								| Transactions 
+								span.email-count (2)
+						li
+							a(href='#') Hotspots
+						li
+							a(href='#') Bills
+						li
+							a(href='#') Trash
+						li.pure-menu-heading Admin
+						li
+							a(href='#') Import Data
+						li
+							a(href='#') Request a feature!
+						li
+							a(href='#') About
+
+
+
