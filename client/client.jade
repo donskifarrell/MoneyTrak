@@ -5,10 +5,11 @@ head
 body
 	#layout.pure-g-r.content
 		#nav.pure-u
-
 			a.nav-menu-button(href='#nav') Menu
 			.nav-inner
-				a.pure-button.primary-button(href='#') Compose
+				.header
+					a(href='#') 
+						h2 MoneyTrak
 				.pure-menu.pure-menu-open
 					ul
 						li.pure-menu-heading Views
@@ -17,7 +18,7 @@ body
 						li
 							a(href='#')
 								| Transactions 
-								span.email-count (2)
+								span.tran-count (2)
 						li
 							a(href='#') Hotspots
 						li
