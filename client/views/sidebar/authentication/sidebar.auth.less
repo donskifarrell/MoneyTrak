@@ -4,6 +4,9 @@
 
 
 /* Styling floating login/register box */
+.move{
+    margin-left: 50px;
+}
 
 .box {
     border: 1px solid;     
@@ -16,10 +19,39 @@
         width: 16em;
         height: 20em;
         border-radius: 10px;
+        border-width: 3px;
+        border-color: #fff;
         margin-left: -19.4em;
         margin-top: 6em;
+        z-index: 10;
+
+        &:after, &:before {
+            content: ' ';
+            position: absolute;
+            border: 30px solid transparent;
+            top: 1.6em;
+        }
+
+        &:before {
+            border-right-color: #fff;
+            left: 8.1em; //9.6%;
+            z-index: 9;
+        }
+
+        &:after {
+            border-right-color: @sidebar-background;
+            left: 8.35em; 
+            z-index: 11;
+        }
+    }
+
+    &.register {
+        &:before, &:after {
+            top: 9em;
+        }
     }
 }
+
 
 /* Styling login buttons */
 

@@ -4,11 +4,11 @@ template(name='account_box')
     {{> login_menu}}
 
 template(name='login_menu')
-  .pure-g-r
-    button.google Sign In with Google
-  .pure-g-r
-    button.twitter Sign In with Twitter
-  .pure-g-r
+  .pure-g-r.move
+    button.pure-button.google Sign In with Google
+  .pure-g-r.move
+    button.pure-button.twitter Sign In with Twitter
+  .pure-g-r.move
     {{> user_account_form}}
 
 template(name='user_account_form')
