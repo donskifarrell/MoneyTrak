@@ -7,6 +7,31 @@ template(name='navigation_menu2')
     h4 View hotspots
 
 template(name='navigation_menu')
+   .pure-menu.pure-menu-open
+        ul
+            li.pure-menu-heading Views
+            li
+                a(href='#') Account Summary
+            li
+                a(href='#')
+                    | Transactions 
+                    span.tran-count (2)
+            li
+                a(href='#') Hotspots
+            li
+                a(href='#') Bills
+            li
+                a(href='#') Trash
+            li.pure-menu-heading Admin
+            li
+                a(href='#') Import Data
+            li
+                a(href='#') Request a feature!
+            li
+                a(href='#') About
+
+
+template(name='navigation_menu_old')
     .accordion#nav-menu
         .accordion-group.nav-group
             .accordion-heading.nav-gradient

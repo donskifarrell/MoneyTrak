@@ -14,7 +14,10 @@ template(name='sidebar_user_details')
 
 //- Main section of sidebar
 template(name='sidebar_content')
-  {{> account_box}}
+  {{#unless currentUser}}
+    {{> account_box}}
+  {{/unless}}
+
   #nav.pure-u
     a.nav-menu-button(href='#nav') Menu
     .nav-inner

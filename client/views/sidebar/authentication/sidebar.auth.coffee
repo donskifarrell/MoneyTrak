@@ -6,18 +6,6 @@ Meteor.startup ->
   # user_account_form template and related
   #
   Template.user_account_form.events
-    "click .toEnrollBtn": (e) ->
-      e.preventDefault()
-      e.stopPropagation()
-      loginButtonsSession.resetMessages()
-      loginButtonsSession.set('inSignupFlow', true);    
-
-    "click .toLoginBtn": (e) ->
-      e.preventDefault()
-      e.stopPropagation()
-      loginButtonsSession.resetMessages()
-      loginButtonsSession.set('inSignupFlow', false);
-
     "click #login-buttons-password": ->
       loginOrSignup()
 
