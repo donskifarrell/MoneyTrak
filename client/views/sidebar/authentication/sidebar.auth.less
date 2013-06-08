@@ -4,8 +4,69 @@
 
 
 /* Styling floating login/register box */
-.move{
-    margin-left: 50px;
+
+/* Styling Login Form */
+
+.login-form {
+    .form-actions {
+        margin-top: 20px;
+        margin-left: 30px;
+
+        .left-pull {
+            margin-left: -14px;
+        }
+        
+        .enroll {
+            margin-left: -29px !important;
+        }
+    }
+    
+    .toForgotPassBtn{
+        text-decoration: underline;
+        font-size: 0.8em;
+    }
+
+    fieldset > .pure-control-group {
+        letter-spacing: normal;
+        margin-left: 15px;
+
+        label {
+            display: inline;
+        }
+
+        .lblpass {
+            padding-right: 2px;
+        }
+    }
+
+    fieldset > a {
+        letter-spacing: normal;
+    }
+
+    .login-messages {
+        width: 17.8em;
+        letter-spacing: normal;
+    }
+}
+
+.login-box{
+    margin-left: 10px;
+    margin-top: 10px;
+    color: white;
+
+    .pure-g-r {
+        .header {
+            margin-left: 4.5em;
+        }
+
+        .lbl {
+            margin-left: 1em;
+        }
+
+        p, h2 {
+            letter-spacing: normal;
+        }
+    }
 }
 
 .box {
@@ -16,8 +77,8 @@
 
     &.account-box {
         background-color: @sidebar-background;
-        width: 16em;
-        height: 20em;
+        width: 19em;
+        height: 28em;
         border-radius: 10px;
         border-width: 3px;
         border-color: #fff;
@@ -55,12 +116,19 @@
 
 /* Styling login buttons */
 
-button {
-    &.google {
+.google {
+    .pure-button {
+        margin-left: 3em;
+        width: 185px;        
         .pureButtonStyle(@btn-login-google);
     }
+}
 
-    &.twitter {
+.twitter {
+    .pure-button {
+        margin-left: 3em;
+        margin-top: 10px;
+        width: 185px;  
         .pureButtonStyle(@btn-login-twitter);
     }
 }
@@ -94,32 +162,4 @@ button {
 }
 
 
-/* Styling Login Form */
-
-.login-form {
-
-    @media only screen and (max-height : 790px) { 
-        margin-bottom: -20%;
-    } 
-
-	.form-actions {
-		background-color: #fff !important;
-		border-top: 0px !important;
-        margin-top: -7px !important;
-
-        .left-pull {
-            margin-left: -14px;
-        }
-        
-        .enroll {
-            margin-left: -29px !important;
-        }
-	}
-    
-    .toForgotPassBtn{
-        font-size: 0.8em;
-        margin-left: 40%;
-        margin-top: -6%;
-    }
-}
 

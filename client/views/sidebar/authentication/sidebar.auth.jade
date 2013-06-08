@@ -4,60 +4,58 @@ template(name='account_box')
     {{> login_menu}}
 
 template(name='login_menu')
-  .pure-g-r.move
-    button.pure-button.google Sign In with Google
-  .pure-g-r.move
-    button.pure-button.twitter Sign In with Twitter
-  .pure-g-r.move
-    {{> user_account_form}}
+  .login-box
+    .pure-g-r
+      {{> user_account_form}}
+    p.or
+      span Or
+    .pure-g-r.google
+      button.pure-button Sign In with Google
+    .pure-g-r.twitter
+      button.pure-button Sign In with Twitter
 
 template(name='user_account_form')
   {{#if inSignupFlow}}
-  p We need a few details to register you..
+  h2.header Register
+  p.lbl We need a few details to register you..
+  {{else}}
+  h2.header Login
+  p.lbl Please enter your login details
   {{/if}}
-  form.login-form
+  form.pure-form.pure-form-aligned.login-form
       fieldset
-          .control-group.input-prepend
-            .controls
-              span.add-on
-                i.icon-user
-              input#login-username(type='text', placeholder='Username')
+          .pure-control-group.input-prepend
+            label(for='login-username') Username
+            input#login-username(type='text', placeholder='Username')
+
         {{#if inSignupFlow}} 
-          .control-group.input-prepend
-            .controls
-              span.add-on
-                i.icon-envelope
-              input#login-email(type='text', placeholder='Email')
+          .pure-control-group.input-prepend
+            label(for='login-email') Email Address
+            input#login-email(type='text', placeholder='Email Address')
         {{/if}}
-          .control-group.input-prepend
-            .controls
-              span.add-on
-                i.icon-lock
-              input#login-password(type='password', placeholder='Password')
-        {{#unless inSignupFlow}}
-          button.btn.btn-link.toForgotPassBtn Forgotten password?
-        {{/unless}}
-        {{#if inSignupFlow}}        
-          .control-group.input-prepend
-            .controls
-              span.add-on
-                i.icon-exclamation-sign
-              input#login-password-again(type='password', placeholder='Confirm Password')
+
+          .pure-control-group.input-prepend
+            label.lblpass(for='login-password') Password
+            input#login-password(type='password', placeholder='Password')
+
+        {{#if inSignupFlow}} 
+          .pure-control-group.input-prepend
+            label(for='login-password') Confirm Password
+            input#login-password-again(type='password', placeholder='Re-type Password')
+        {{/if}}
+
+        .login-messages
           {{> login_message}}
-          .form-actions
-            .span9.left-pull.enroll
-              p Already registered?
-                button.btn.btn-link.toLoginBtn Login here!
-            .span3
+
+        {{#if inSignupFlow}}
+          .form-actions.enroll
               #login-buttons-password.btn.btn-primary(type='submit').enroll-button Register
         {{else}}
-          {{> login_message}}
-          .form-actions
-            .span9.left-pull
-              p Haven't got an account?
-                button.btn.btn-link.toEnrollBtn Create one here!
-            .span3
-              #login-buttons-password.btn.btn-primary.login-button-form-submit.login-button Login
+          .pure-g-r.form-actions
+            .pure-u-1-2
+              a.toForgotPassBtn(href="#") Forgotten password?
+            .pure-u-1-2
+              #login-buttons-password.pure-button.login-button-form-submit.login-button Login
         {{/if}}
 
 template(name='login_message')
