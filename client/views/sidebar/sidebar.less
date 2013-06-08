@@ -50,12 +50,26 @@
 .account-btns {
     .login-btn {
         margin-top: 2.0em;
+
+        &.glow{
+            box-shadow: 0 0 1.1em @btn-login-glow;
+            -webkit-box-shadow: 0 0 1.1em @btn-login-glow;
+            -moz-box-shadow: 0 0 1.1em @btn-login-glow;
+        }
     }    
+
     p {
         margin-top: 2.0em;
     }
+
     .register-btn {
-        margin-top: 1.0em;
+        margin-top: 1.0em;        
+
+        &.glow{
+            box-shadow: 0 0 5px @btn-login-glow;
+            -webkit-box-shadow: 0 0 5px @btn-login-glow; 
+            -moz-box-shadow: 0 0 5px @btn-login-glow;
+        }
     } 
 }
 
@@ -88,6 +102,9 @@
     padding: 0 10px; 
     color: white;
 }
+
+
+
 
 
 /* OLD  Styling Sidebar */
