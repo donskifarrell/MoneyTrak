@@ -7,8 +7,8 @@ template(name='sidebar_user_details')
     {{else}}
       .logged-in
         .alias {{currentUser.username}}
-        p Not you? 
-          a.logout Logout
+        p.logout-lbl Not you?
+          a(href='#').logout-btn Logout
     {{/if}}
   {{/if}}
 
