@@ -48,8 +48,8 @@ template(name='user_account_form')
           {{> login_message}}
 
         {{#if inSignupFlow}}
-          .form-actions.enroll
-              #login-buttons-password.btn.btn-primary(type='submit').enroll-button Register
+          .pure-g-r.form-actions.enroll
+              #login-buttons-password.pure-button(type='submit').enroll-button Register
         {{else}}
           .pure-g-r.form-actions
             .pure-u-1-2

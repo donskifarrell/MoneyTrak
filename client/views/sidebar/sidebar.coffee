@@ -2,6 +2,8 @@ Meteor.startup ->
   # for convenience
   loginButtonsSession = Accounts._loginButtonsSession
 
+  loginButtonsSession.set('inSignupFlow', false)
+  
   Template.sidebar_user_details.events "click .logout": (e, tmpl) ->
     Meteor.logout (err) ->
       if err

@@ -11,10 +11,6 @@
     .form-actions {
         margin-top: 20px;
         margin-left: 30px;
-        
-        .enroll {
-            margin-left: -29px !important;
-        }
     }
     
     .toForgotPassBtn{
@@ -22,12 +18,16 @@
         font-size: 0.8em;
     }
 
+    .enroll-button {
+        letter-spacing: normal;
+        margin-left: 9em;        
+    }
+
     fieldset > .pure-control-group {
         letter-spacing: normal;
-        margin-left: 15px;
 
         label {
-            display: inline;
+            width: 6em;
         }
     }
 
@@ -41,8 +41,7 @@
     }
 }
 
-.login-box{
-    margin-left: 10px;
+.login-box {
     margin-top: 10px;
     color: white;
 
@@ -102,6 +101,8 @@
         &:before, &:after {
             top: 9em;
         }
+
+        height: 30em;
     }
 }
 
@@ -109,8 +110,8 @@
 /* Styling login buttons */
 
 .google {
-    .pure-button {
-        margin-left: 3em;
+    .pure-button {        
+        margin-left: 3.6em;
         width: 185px;        
         .pureButtonStyle(@btn-login-google);
     }
@@ -118,7 +119,7 @@
 
 .twitter {
     .pure-button {
-        margin-left: 3em;
+        margin-left: 3.6em;
         margin-top: 10px;
         width: 185px;  
         .pureButtonStyle(@btn-login-twitter);
