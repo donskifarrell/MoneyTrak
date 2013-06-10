@@ -11,24 +11,22 @@ template(name='navigation_menu')
         ul
             li.pure-menu-heading Views
             li
-                a(href='#') Account Summary
+                a(href='/AccountSummary') Account Summary
             li
-                a(href='#')
+                a(href='/Transactions')
                     | Transactions 
                     span.tran-count (2)
             li
-                a(href='#') Hotspots
+                a(href='/Hotspots') Hotspots
             li
-                a(href='#') Bills
-            li
-                a(href='#') Trash
+                a(href='/Bills') Bills
             li.pure-menu-heading Admin
             li
-                a(href='#') Import Data
+                a(href='/Import') Import Data
             li
-                a(href='#') Request a feature!
+                a(href='/RequestFeature') Request a feature!
             li
-                a(href='#') About
+                a(href='/About') About
 
 
 template(name='navigation_menu_old')
