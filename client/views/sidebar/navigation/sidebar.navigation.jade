@@ -15,7 +15,7 @@ template(name='navigation_menu')
             li
                 a(href='/Transactions', class='{{activeNav \'trans\'}}')
                     | Transactions 
-                    span.tran-count (2)
+                    span.tran-count ({{ untaggedTrans }})
             li
                 a(href='/Hotspots', class='{{activeNav \'hotspots\'}}') Hotspots
             li
@@ -27,45 +27,3 @@ template(name='navigation_menu')
                 a(href='/RequestFeature', class='{{activeNav \'reqFeature\'}}') Request a feature!
             li
                 a(href='/About', class='{{activeNav \'about\'}}') About
-
-
-template(name='navigation_menu_old')
-    .accordion#nav-menu
-        .accordion-group.nav-group
-            .accordion-heading.nav-gradient
-              a.accordion-toggle.nav-import(
-                                data-toggle='collapse', 
-                                data-parent='#nav-menu', 
-                                href='#import-data').nav-font
-                | Import Financial Data
-            #import-data.accordion-body.collapse.in
-              .accordion-inner
-                | Load a .csv file into the tool:
-                button.btn.loadCsv Load CSV file
-        .accordion-group.nav-group
-            .accordion-heading.nav-gradient
-              a.accordion-toggle.nav-transactions(
-                                data-toggle='collapse', 
-                                data-parent='#nav-menu', 
-                                href='#transactions-view').nav-font
-                | Transactions View
-            #transactions-view.accordion-body.collapse
-              .accordion-inner
-                p.lead Transaction Summary
-                p 
-                    b Total: 
-                    | {{ numTransactions }}
-                p 
-                    b Untagged: 
-                    | {{ numTransactions }}
-        .accordion-group.nav-group
-            .accordion-heading.nav-gradient
-              a.accordion-toggle.nav-graph(
-                                data-toggle='collapse', 
-                                data-parent='#nav-menu', 
-                                href='#graph-view').nav-font
-                | Graph View
-            #graph-view.accordion-body.collapse
-              .accordion-inner
-                p.lead Select a graph
-                

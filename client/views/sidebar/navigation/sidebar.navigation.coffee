@@ -20,7 +20,7 @@ Meteor.startup ->
                     console.log(FPError.toString())
             );
 
-    Template.navigation_menu.numTransactions = ->
+    Template.navigation_menu.untaggedTrans = ->
         Transactions.find({owner: Meteor.userId()}).count()
 
     parseCsvFile = (csvData) ->
