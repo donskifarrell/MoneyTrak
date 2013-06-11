@@ -15,7 +15,7 @@
       "jade-handlebars": {
         "git": "https://github.com/SimonDegraeve/meteor-jade-handlebars.git",
         "branch": "master",
-        "commit": "82f6f9ac43a68ffabe1d9b9620be2a4ca6790b56"
+        "commit": "f77235f9fd41b6ab1cfc2b624fb7a0bcbaaeb358"
       },
       "filepicker": {
         "git": "https://github.com/Filepicker/meteor.git",
