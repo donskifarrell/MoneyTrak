@@ -24,7 +24,7 @@ if Meteor.is_client
         Session.set("title", ": Bills");
         Session.set("activeNav", "bills");
 
-    "/Import": 
+    "/ImportData": 
       to: "import_data_view"
       and: ->
         Session.set("title", ": Import Data");

@@ -49,13 +49,13 @@ template(name='user_account_form')
 
         {{#if inSignupFlow}}
           .pure-g-r.form-actions.enroll
-              #login-buttons-password.pure-button(type='submit').enroll-button Register
+              #login-buttons-password.pure-button.enroll-button Register
         {{else}}
           .pure-g-r.form-actions
             .pure-u-1-2
               a.toForgotPassBtn(href="#") Forgotten password?
             .pure-u-1-2
-              #login-buttons-password.pure-button.login-button-form-submit.login-button Login
+              #login-buttons-password.pure-button.login-button Login
         {{/if}}
 
 template(name='login_message')
