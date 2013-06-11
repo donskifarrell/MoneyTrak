@@ -3,7 +3,7 @@
   "dependencies": {
     "basePackages": {
       "jade-handlebars": {
-        "git": "https://github.com/SimonDegraeve/meteor-jade-handlebars.git",
+        "git": "https://github.com/krizka/meteor-jade-handlebars.git",
         "branch": "master"
       },
       "filepicker": {},
@@ -13,9 +13,9 @@
     },
     "packages": {
       "jade-handlebars": {
-        "git": "https://github.com/SimonDegraeve/meteor-jade-handlebars.git",
+        "git": "https://github.com/krizka/meteor-jade-handlebars.git",
         "branch": "master",
-        "commit": "f77235f9fd41b6ab1cfc2b624fb7a0bcbaaeb358"
+        "commit": "c5b505a324f0de230f2e717157913ce115c4ab3c"
       },
       "filepicker": {
         "git": "https://github.com/Filepicker/meteor.git",
