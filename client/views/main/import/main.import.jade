@@ -1,19 +1,38 @@
 
 template(name='import_data_view')
     {{> main_header}}
+    .main-content
+        {{> import_data_timescale}}
+        {{> import_data_natwest}}
+        {{> import_data_csv}}
 
-template(name='import_data')
-    h2 Import Data
-    hr
-    .row-fluid
-        .span8.options
-            p Please enter your Natwest Online Banking login details:
-            form
-                fieldset
-                    label Customer Number:
-                    input#cust-number(type="text", placeholder="Enter your Natwest customer number", value="XXXX")
-                    label 4-Digit Pin:
-                    input#cust-pin(type="password", placeholder="Enter your 4-digit Natwest pin number", value="XXXX")
-                    label Password:
-                    input#cust-pass(type="password", placeholder="Enter your Natwest online banking password", value="XXXX")
-                    button.btn.import(type="submit") Import!
+template(name='import_data_timescale')
+    .pure-g-r.timescale
+        p break down of timescale of data imported
+
+template(name='import_data_natwest')
+    .pure-g-r.import-natwest
+        form.pure-form.pure-form-aligned
+            fieldset
+                legend Import data from your Natwest Online Banking account
+                p MoneyTrak has the ability to import all of your transaction history from your Natwest Online Banking account. Please provide the following details. To learn how we use these details, please follow the link 'here'.
+                .pure-control-group
+                  label(for='custNo') Customer Number
+                  input#custNo(type='text', placeholder='Enter your Natwest customer number')
+                .pure-control-group
+                  label(for='4digit') 4-Digit Natwest Pin
+                  input#4digit(type='password', placeholder='Enter your 4-digit Natwest pin number')
+                .pure-control-group
+                  label(for='password') Natwest Password
+                  input#password(type='password', placeholder='Enter your Natwest online banking password')
+                .pure-controls
+                  button.pure-button(type='submit') Import Data from Natwest
+
+template(name='import_data_csv')
+    .pure-g-r.import-csv
+        form.pure-form.pure-form-aligned
+            fieldset
+                legend Import data from a local file
+                p If you do not have a Natwest Online Banking account, you can still import data from a flatfile. This flatfile needs to have the following format. To learn how we use these details, please follow the link 'here'.
+                .pure-control-group
+                    button.pure-button.loadCsv Import Data from a file
