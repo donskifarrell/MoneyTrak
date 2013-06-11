@@ -7,7 +7,6 @@ if Meteor.is_client
       to: "account_summary_view"
       and: ->
         Session.set("title", ": Account Summary");
-        console.log(Meteor.Router.page())
         Session.set("activeNav", "accSummary");
     "/Transactions": 
       to: "transactions_view"
@@ -41,4 +40,20 @@ if Meteor.is_client
         Session.set("title", ": About");
         Session.set("activeNav", "about");
 
-      
+    "/": 
+      to: "home"
+      and: ->
+        Session.set("title", "");
+        Session.set("activeNav", "");
+
+  Meteor.Router.filters checkLoggedIn: (page) ->
+    if Meteor.loggingIn()
+      "logging_in_view"
+    else if Meteor.user()
+      page
+    else
+      Meteor.Router.to(Meteor.Router.homePath());
+
+
+  # applies to all pages
+  Meteor.Router.filter("checkLoggedIn", {except: 'home'})

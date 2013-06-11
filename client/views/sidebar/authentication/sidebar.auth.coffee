@@ -197,6 +197,7 @@ Meteor.startup ->
         loginButtonsSession.errorMessage error.reason or "Unknown error"
       else
         loginButtonsSession.closeDropdown()
+        Meteor.Router.to("/AccountSummary");
 
 
   signup = ->
@@ -227,6 +228,7 @@ Meteor.startup ->
         loginButtonsSession.errorMessage error.reason or "Unknown error"
       else
         loginButtonsSession.closeDropdown()
+        Meteor.Router.to("/ImportData");
 
 
   forgotPassword = ->
