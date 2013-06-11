@@ -1,6 +1,8 @@
 {
   "packages": {
-    "jade-handlebars": {},
+    "jade-handlebars": { 
+        "git": "https://github.com/SimonDegraeve/meteor-jade-handlebars.git"
+    },
     "filepicker": {},
     "jquery-csv": {},
     "handlebar-helpers": {},
