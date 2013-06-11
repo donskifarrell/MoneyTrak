@@ -11,22 +11,22 @@ template(name='navigation_menu')
         ul
             li.pure-menu-heading Views
             li
-                a(href='/AccountSummary') Account Summary
+                a(href='/AccountSummary', class='{{activeNav \'accSummary\'}}') Account Summary
             li
-                a(href='/Transactions')
+                a(href='/Transactions', class='{{activeNav \'trans\'}}')
                     | Transactions 
                     span.tran-count (2)
             li
-                a(href='/Hotspots') Hotspots
+                a(href='/Hotspots', class='{{activeNav \'hotspots\'}}') Hotspots
             li
-                a(href='/Bills') Bills
+                a(href='/Bills', class='{{activeNav \'bills\'}}') Bills
             li.pure-menu-heading Admin
             li
-                a(href='/Import') Import Data
+                a(href='/Import', class='{{activeNav \'import\'}}') Import Data
             li
-                a(href='/RequestFeature') Request a feature!
+                a(href='/RequestFeature', class='{{activeNav \'reqFeature\'}}') Request a feature!
             li
-                a(href='/About') About
+                a(href='/About', class='{{activeNav \'about\'}}') About
 
 
 template(name='navigation_menu_old')

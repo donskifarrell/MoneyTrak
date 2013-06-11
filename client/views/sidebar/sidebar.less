@@ -5,12 +5,21 @@
     position: relative;
 }
 
+.header {
+    h2 {
+        font-family: 'Satisfy', cursive;
+        font-size: 42px;
+        margin-top: 0px;
+        margin-bottom: 25px;
+    }
+}
+
 #nav {
     position: fixed;
     top: 0;
     bottom: 0;
     overflow: auto;
-    width: 180px;
+    width: 220px;
     background: @sidebar-background;
     text-align: center;
     padding: 2em 0;
@@ -27,6 +36,10 @@
         a {
             color: @sidebar-href-colour;
             margin-left: 0.5em;
+
+            &.active {
+                background: @sidebar-active-href-background;
+            }
         }
     }
 
