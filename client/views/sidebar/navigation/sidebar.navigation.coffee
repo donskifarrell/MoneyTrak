@@ -1,18 +1,6 @@
 Meteor.startup ->
 
-    Template.navigation_menu.events 
-        "click .nav-import": (e, tmpl) ->
-            setHeaderAsActive(e)
-            Session.set("navMenuSelection", "import-data")
-
-        "click .nav-transactions": (e, tmpl) ->
-            setHeaderAsActive(e)
-            Session.set("navMenuSelection", "transactions-view")
-
-        "click .nav-graph": (e, tmpl) ->
-            setHeaderAsActive(e)
-            Session.set("navMenuSelection", "graph-view")
-        
+    Template.navigation_menu.events       
         "click .loadCsv": (e, tmpl) ->
             filepicker.setKey('Acx6unRqUSRK0I5s3NvEgz');
             filepicker.pick(
@@ -61,7 +49,6 @@ Meteor.startup ->
     setHeaderAsActive = (element)->
         clearAllHeaders()
         $(element.currentTarget).parent().addClass("active")
-
 
     clearAllHeaders = ->
         $(".nav-gradient").removeClass("active");

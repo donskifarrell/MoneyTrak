@@ -1,10 +1,15 @@
-Meteor.startup ->
 
-    Template.main_content.isPageSelected = (page) ->
-        isSelected = false
-        selected = Session.get("navMenuSelection")
-        if selected == page
-            isSelected = true
+Handlebars.registerHelper(
+    'title', ->
+        return Session.get("title");
+)
 
-        isSelected
+Handlebars.registerHelper(
+    'subtitle', ->
+        return Session.get("subtitle");
+)
 
+Handlebars.registerHelper(
+    'activeNav', (nav) ->
+        if Session.equals("activeNav", nav) then "active" else "";
+)

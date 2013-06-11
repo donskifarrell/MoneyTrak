@@ -1,21 +1,5 @@
-template(name='main_content')
-  {{#if currentUser}}
-    {{#if isPageSelected 'import-data'}}
-        {{> import_data}}
-    {{/if}}
-    {{#if isPageSelected 'transactions-view'}}
-        {{> transactions_view}}
-    {{/if}}
-    {{#if isPageSelected 'graph-view'}}
-        {{> graph_view}}
-    {{/if}}
-    {{#if isPageSelected 'location_view'}}
-        {{> location_view}}
-    {{/if}}
-  {{else}}
-    {{> landing_page}}
-  {{/if}}
-
-template(name='location_view')
-    h2 Location Overview
-    hr
+template(name='main_header')
+    .pure-g-r.main-header
+        .pure-u-1-1.main-titles
+            h2.main-title {{title}}
+                p.main-subtitle {{subtitle}}
