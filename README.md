@@ -1,3 +1,5 @@
+# MoneyTrak (Previously LifeChart)
+
 ## Some quick notes:
 
 # Coding Conventions
@@ -13,6 +15,7 @@ Follow these rules for project specific cases. Use other dependencies convention
 
 * https://github.com/aleno/bankjob / http://bankjob.rubyforge.org/
 * https://github.com/MoneyToolkit/Bank-Scraper
+* Roll my own - done
 
 # Rough plan:
 
