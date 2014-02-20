@@ -1,8 +1,10 @@
 # MoneyTrak (Previously LifeChart)
 
+Currently in heavy Alpha at http://www.moneytrak.co.uk/
+
 ## Some quick notes:
 
-# Coding Conventions
+## Coding Conventions
 
 Follow these rules for project specific cases. Use other dependencies conventions where necessary.
 
@@ -11,13 +13,13 @@ Follow these rules for project specific cases. Use other dependencies convention
 * Class names / ID's separated by dashes '-'
 * Function names start with lower case and use CamelCase for rest of name.
 
-# Options for bank scrapers:
+## Options for bank scrapers:
 
 * https://github.com/aleno/bankjob / http://bankjob.rubyforge.org/
 * https://github.com/MoneyToolkit/Bank-Scraper
 * Roll my own - done
 
-# Rough plan:
+## Rough plan:
 
 * Add ability to import csv files into tool (send to server)
 * Convert csv data into graphs
@@ -25,15 +27,14 @@ Follow these rules for project specific cases. Use other dependencies convention
 * Shared spending with other users
 * Geotagging for spending hotspots
 
-# Useful Links:
+## Useful Links:
 
 * http://www.webappers.com/2010/03/09/15-best-free-online-tools-for-web-design-development/
 * Better file picker: https://github.com/blueimp/jQuery-File-Upload
 * Jquery-csv also does file upload
 
-# Filepicker
-API Key: Acx6unRqUSRK0I5s3NvEgz
+## Filepicker
+API Key: 
 
-
-# TODOs:
+## TODOs:
 * convert csv dates to actual dates + update validation
